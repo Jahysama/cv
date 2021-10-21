@@ -53,7 +53,7 @@ const VoxelDog = () => {
 
       // 640 -> 240
       // 8   -> 6
-      const scale = scH * 0.07
+      const scale = scH * 0.09
       const camera = new THREE.OrthographicCamera(
         -scale,
         scale,
