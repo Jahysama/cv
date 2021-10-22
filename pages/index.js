@@ -194,6 +194,15 @@ const Home = () => (
             </Button>
           </NextLink>
         </Box>
+
+	<Box align="center" my={4}>
+          <NextLink href="https://www.buymeacoffee.com/kosar">
+            <Button rightIcon={<ChevronRightIcon />} colorScheme="yellow">
+              Donate me
+            </Button>
+          </NextLink>
+        </Box>
+
       </Section>
     </Container>
   </Layout>
