@@ -22,8 +22,8 @@ import {
   IoLogoGithub,
   IoLogoLinkedin,
   IoMailSharp,
-  SiUpwork
-  
+  SiUpwork,
+  SiBuymeacoffee
 } from 'react-icons/io5'
 
 const Home = () => (
@@ -197,7 +197,7 @@ const Home = () => (
 
 	<Box align="center" my={4}>
           <NextLink href="https://www.buymeacoffee.com/kosar">
-            <Button rightIcon={<ChevronRightIcon />} colorScheme="yellow">
+            <Button rightIcon={SiBuymeacoffee} colorScheme="yellow">
               Donate me
             </Button>
           </NextLink>
