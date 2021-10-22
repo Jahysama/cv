@@ -70,7 +70,7 @@ const Home = () => (
           Bio
         </Heading>
         <Paragraph>
-          Hi again! I'm a student at Lomonosov Moscow State University. I'm passionate about Machine learning and often hang out on kaggle searching for new datasets. I also like to apply my skills in computational and structural biology. In a free time i makes simple indie games using python.
+          Hi again! I'm a student at Lomonosov Moscow State University. I'm passionate about Machine learning and often hang out on kaggle searching for new datasets. I also like to apply my skills in computational and structural biology. In a free time i make simple indie games using python.
         </Paragraph>
       </Section>
 
@@ -79,7 +79,7 @@ const Home = () => (
           Lab
         </Heading>
         <Paragraph>
-         Currently studying Tenebrio beetles digestive enzymes. Buildings de novo protein structures and finding ligand interactions with PyMol and docking tools. Previously worked with MutS protein in a DNA reparation system.
+         Currently studying Tenebrio bugs digestive enzymes. Buildings de novo protein structures and finding ligand interactions with PyMol and docking tools. Previously worked with MutS protein wich is part of DNA reparation system.
           </Paragraph>
         <Box align="center" my={4}>
           <NextLink href="/works">
