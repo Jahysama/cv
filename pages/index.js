@@ -24,7 +24,7 @@ import {
   IoMailSharp,
   SiUpwork,
   SiBuymeacoffee
-} from 'react-icons'
+} from 'react-icons/io5'
 
 const Home = () => (
   <Layout>
