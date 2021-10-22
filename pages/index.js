@@ -197,7 +197,7 @@ const Home = () => (
 
 	<Box align="center" my={4}>
           <NextLink href="https://www.buymeacoffee.com/kosar">
-            <Button rightIcon={SiBuymeacoffee} colorScheme="yellow">
+            <Button colorScheme="yellow">
               Donate me
             </Button>
           </NextLink>
