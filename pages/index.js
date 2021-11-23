@@ -79,7 +79,7 @@ const Home = () => (
           Lab
         </Heading>
         <Paragraph>
-         Currently studying Tenebrio bugs digestive enzymes. Buildings de novo protein structures and finding ligand interactions with PyMol and docking tools. Previously worked with MutS protein wich is part of DNA reparation system.
+         Currently studying Tenebrio bugs digestive enzymes. Building de novo protein structures and finding ligand interactions with PyMol and docking tools. Previously worked with MutS protein which is part of DNA reparation system.
           </Paragraph>
         <Box align="center" my={4}>
           <NextLink href="/works">
