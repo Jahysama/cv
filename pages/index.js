@@ -96,7 +96,11 @@ const Home = () => (
         </Heading>
         <BioSection>
           <BioYear>2019</BioYear>
-	Working as junior manager at Wanta Group.
+	Working as a junior manager at Wanta Group.
+        </BioSection>
+	<BioSection>
+          <BioYear>2021-present</BioYear>
+	Working as a junior bioinformatician at GenX.
         </BioSection>
         <BioSection>
           <BioYear>2021</BioYear>
