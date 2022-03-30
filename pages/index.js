@@ -95,7 +95,7 @@ const Home = () => (
           Work at GenX
         </Heading>
         <Paragraph>
-         I develop pipeline for pedigree simulation with unrelated founders, relatedness degrees estimation and compare between true and estimated degrees. In my work i actively use URSA, KING, IBIS, Passim with samtools and all this inside Snakemake. Important part of my work is also pipeline speed enhancement, which requires computing power estimation and optimization.
+         I develop pipeline for pedigree simulation with unrelated founders, relatedness degrees estimation and compare between true and estimated degrees. In my work i actively use ERSA, KING, IBIS, Ped-Sim with samtools inside Snakemake. Important part of my work is also pipeline speed enhancement, which requires computing power estimation and optimization.
           </Paragraph>
         <Box align="center" my={4}>
           <NextLink href="https://genx.network/">
