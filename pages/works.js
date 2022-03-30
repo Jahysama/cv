@@ -7,6 +7,7 @@ import { GridItem } from '../components/grid-item'
 import Fuuka from '../public/images/works/Fuuka.png'
 import BoardGames from '../public/images/works/board.jpg'
 import WrongGen from '../public/images/works/wrongen.jpeg'
+import CompTech from '../public/images/works/comp.png'
 
 
 const Works = () => (
@@ -20,6 +21,11 @@ const Works = () => (
         <Section>
           <GridItem href="https://github.com/Jahysama/Fuuka" title="Fuuka discord bot" thumbnail={Fuuka}>
             A Deep Learning chat bot that can generate various pictures and talk to people.
+          </GridItem>
+        </Section>
+        <Section>
+          <GridItem href="https://github.com/comptech-winter-school/genetic-potioncraft" title="Genetic Potion" thumbnail={CompTech}>
+            Scikit-learn ML enhancer based on genetic algorithms.
           </GridItem>
         </Section>
      
