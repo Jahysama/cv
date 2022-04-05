@@ -36,7 +36,7 @@ const Home = () => (
         textAlign="center"
         bg={useColorModeValue('whigreenpha.500', 'whigreenpha.200')}
       >
-        Hello, Hallo, Привет, こんにちは! I&apos;m a Junior Datascientist and Bioinformatics student based in Moscow, Russia OwO/
+        Hello, Hallo, Привет, こんにちは! I&apos;m a Junior Datascientist and Bioinformatics student based in Yerevan, Armenia OwO/
       </Box>
 
       <Box display={{ md: 'flex' }}>
