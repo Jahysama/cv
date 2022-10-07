@@ -14,9 +14,7 @@ const Publications = () => (
         Publications
       </Heading>
 
-      <Section delay={0.1}>
         <SimpleGrid columns={[1, 2, 2]} gap={6}>
-          <Section>
           <GridItem
             title="Genomic Relatedness Detection Pipeline"
             thumbnail={GRAPE}
@@ -45,4 +43,4 @@ const Publications = () => (
   </Layout>
 )
 
-export default Posts
+export default Publications
