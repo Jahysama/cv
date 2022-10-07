@@ -44,7 +44,7 @@ const Home = () => (
           <Heading as="h2" variant="page-title">
             Egor Kosaretskiy
           </Heading>
-          <p> Bioinformatician / Data Scientist / ?Game developer?</p>
+          <p> Bioinformatician / Data Scientist </p>
         </Box>
         <Box
           flexShrink={0}
@@ -70,7 +70,7 @@ const Home = () => (
           Bio
         </Heading>
         <Paragraph>
-          Hi again! I'm a student at Lomonosov Moscow State University. I'm passionate about Machine learning and often hang out on kaggle searching for new datasets. I also like to apply my skills in computational and structural biology. In a free time i make simple indie games using python.
+          Hi again! I'm a student at Lomonosov Moscow State University. I'm passionate about Machine learning and often hang out on kaggle searching for new datasets. I also like to apply my skills in computational and structural biology. In a free time i make simple indie games using python. Linux enthusiast and open source software contributor(I use Arch btw).
         </Paragraph>
       </Section>
 
@@ -95,7 +95,7 @@ const Home = () => (
           Work at GenX
         </Heading>
         <Paragraph>
-         I develop pipeline for pedigree simulation with unrelated founders, relatedness degrees estimation and compare between true and estimated degrees. In my work i actively use ERSA, KING, IBIS, Ped-Sim with samtools inside Snakemake. Important part of my work is also pipeline speed enhancement, which requires computing power estimation and optimization.
+         I develop pipeline for pedigree simulation with unrelated founders, relatedness degrees estimation and compare between true and estimated degrees. In my work i actively use ERSA, KING, IBIS, Ped-Sim with samtools inside Snakemake. Important part of my work is also pipeline speed enhancement, which requires computing power estimation and optimization. I'm also involved in Federated machine learning engine research for phenotype prediction based on SNV data. Working with XGBoost, Random Forest and MLP models fine tuning.
           </Paragraph>
         <Box align="center" my={4}>
           <NextLink href="https://genx.network/">
@@ -143,7 +143,7 @@ const Home = () => (
         <i><b>Programming skills and languages:</b></i>
         </Paragraph>
         <Paragraph>
-         <b>Python:</b> (Pytorch, NumPy, Pandas. PyMol, SeaBorn, Luigi), <b>R:</b> (tidyverse, ggplot2, caret), HTML, CSS, JavaScript, SQL, Google and Yandex cloud.
+         <b>Python:</b> (Pytorch, NumPy, Pandas, scikit-learn, PyMol, SeaBorn, Luigi), <b>R:</b> (tidyverse, ggplot2, caret), HTML, CSS, JavaScript, SQL, Google and Yandex cloud.
         </Paragraph>
       </Section>
       
@@ -210,7 +210,7 @@ const Home = () => (
         <Box align="center" my={4}>
           <NextLink href="/posts">
             <Button rightIcon={<ChevronRightIcon />} colorScheme="green">
-              Posts
+              Publications
             </Button>
           </NextLink>
         </Box>
