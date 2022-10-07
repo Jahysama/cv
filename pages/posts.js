@@ -31,7 +31,6 @@ const Publications = () => (
           />
          </Section>
 
-         </Section>
           <Section>
           <GridItem
             title="Computational biology and artificial intelligence for personalized medicine-2022"
