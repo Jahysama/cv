@@ -15,6 +15,7 @@ const Publications = () => (
       </Heading>
 
         <SimpleGrid columns={[1, 2, 2]} gap={6}>
+          <Section>
           <GridItem
             title="Genomic Relatedness Detection Pipeline"
             thumbnail={GRAPE}
