@@ -137,13 +137,13 @@ const Home = () => (
         <i><b>Languages:</b></i>
         </Paragraph>
         <Paragraph>
-         <b>Russian: </b>Native,</br><b>German: </b>Upper-intermediate,</br><b>English: </b>Upper-intermediate,</br><b>Japanese: </b>Basic.
+         <b>Russian: </b>Native, <b>German: </b>Upper-intermediate, <b>English: </b>Upper-intermediate, <b>Japanese: </b>Basic.
         </Paragraph>
         <Paragraph>
         <i><b>Programming skills and languages:</b></i>
         </Paragraph>
         <Paragraph>
-         <b>Python:</b> (Pytorch, NumPy, Pandas, scikit-learn, PyMol, SeaBorn, Luigi, Snakemake),</br><b>R:</b> (tidyverse, ggplot2, caret), HTML, CSS, JavaScript, SQL, Google and Yandex cloud.
+         <b>Python:</b> (Pytorch, NumPy, Pandas, scikit-learn, PyMol, SeaBorn, Luigi, Snakemake), <b>R:</b> (tidyverse, ggplot2, caret), HTML, CSS, JavaScript, SQL, Google and Yandex cloud.
         </Paragraph>
 
         <Box align="center" my={4}>
