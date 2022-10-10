@@ -90,18 +90,7 @@ const Navbar = props => {
             <IoLogoGithub />
             GitHub
           </LinkItem>
-          <LinkItem
-            _target="_blank"
-            href="https://that-bag.itch.io/"
-            path={path}
-            display="inline-flex"
-            alignItems="center"
-            style={{ gap: 4 }}
-            pl={2}
-          >
-            <Icon icon="cib:itch-io" />
-            Itch.io
-          </LinkItem>
+
           <LinkItem
             _target="_blank"
             href="https://www.kaggle.com/jahysama"
@@ -114,6 +103,20 @@ const Navbar = props => {
             <Icon icon="cib:kaggle" />
            Kaggle
           </LinkItem>
+
+          <LinkItem
+            _target="_blank"
+            href="https://that-bag.itch.io/"
+            path={path}
+            display="inline-flex"
+            alignItems="center"
+            style={{ gap: 4 }}
+            pl={2}
+          >
+            <Icon icon="cib:itch-io" />
+            Itch.io
+          </LinkItem>
+
         </Stack>
 
         <Box flex={1} align="right">
