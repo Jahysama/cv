@@ -82,9 +82,9 @@ const Home = () => (
          Currently studying Tenebrio bugs digestive enzymes. Building de novo protein structures and finding ligand interactions with PyMol and docking tools. Previously worked with MutS protein which is part of DNA reparation system.
           </Paragraph>
         <Box align="center" my={4}>
-          <NextLink href="/works">
+          <NextLink href="/posts">
             <Button rightIcon={<ChevronRightIcon />} colorScheme="green">
-              My works
+              My Publications
             </Button>
           </NextLink>
         </Box>
@@ -92,15 +92,15 @@ const Home = () => (
 
 <Section delay={0.2}>
         <Heading as="h3" variant="section-title">
-          Work at GenX
+          Work at GENXT
         </Heading>
         <Paragraph>
          I develop pipeline for pedigree simulation with unrelated founders, relatedness degrees estimation and compare between true and estimated degrees. In my work i actively use ERSA, KING, IBIS, Ped-Sim with samtools inside Snakemake. Important part of my work is also pipeline speed enhancement, which requires computing power estimation and optimization. I'm also involved in Federated machine learning engine research for phenotype prediction based on SNV data. Working with XGBoost, Random Forest and MLP models fine tuning.
           </Paragraph>
         <Box align="center" my={4}>
-          <NextLink href="https://genx.network/">
+          <NextLink href="https://genxt.network/">
             <Button rightIcon={<ChevronRightIcon />} colorScheme="green">
-              GenX
+              GENXT
             </Button>
           </NextLink>
         </Box>
@@ -208,9 +208,9 @@ const Home = () => (
         </List>
 
         <Box align="center" my={4}>
-          <NextLink href="/posts">
+          <NextLink href="/works">
             <Button rightIcon={<ChevronRightIcon />} colorScheme="green">
-              Publications
+              Works
             </Button>
           </NextLink>
         </Box>
