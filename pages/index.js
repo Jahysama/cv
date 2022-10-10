@@ -36,7 +36,7 @@ const Home = () => (
         textAlign="center"
         bg={useColorModeValue('whigreenpha.500', 'whigreenpha.200')}
       >
-        Hello, Hallo, Привет, こんにちは! I&apos;m a Datascientist and Bioinformatics student based in Yerevan, Armenia OwO/
+        Hello, Hallo, Привет, こんにちは! I&apos;m a Datascientist and Bioinformatician based in Yerevan, Armenia
       </Box>
 
       <Box display={{ md: 'flex' }}>
@@ -95,7 +95,7 @@ const Home = () => (
           Work at GENXT
         </Heading>
         <Paragraph>
-         I develop pipeline for pedigree simulation with unrelated founders, relatedness degrees estimation and compare between true and estimated degrees. In my work i actively use ERSA, KING, IBIS, Ped-Sim with samtools inside Snakemake. Important part of my work is also pipeline speed enhancement, which requires computing power estimation and optimization. I'm also involved in Federated machine learning engine research for phenotype prediction based on SNV data. Working with XGBoost, Random Forest and MLP models fine tuning.
+         I'm developing pipeline for pedigree simulation with unrelated founders, relatedness degrees estimation and compare between true and estimated degrees. In my work I actively use ERSA, KING, IBIS, Ped-Sim with samtools inside Snakemake. Important part of my work is also pipeline speed enhancement, which requires computing power estimation and optimization. I'm also involved in Federated machine learning engine research for phenotype prediction based on SNV data. Working with XGBoost, Random Forest and MLP models fine tuning.
           </Paragraph>
         <Box align="center" my={4}>
           <NextLink href="https://genxt.network/">
