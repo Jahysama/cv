@@ -36,7 +36,7 @@ const Home = () => (
         textAlign="center"
         bg={useColorModeValue('whigreenpha.500', 'whigreenpha.200')}
       >
-        Hello, Hallo, Привет, こんにちは! I&apos;m a Junior Datascientist and Bioinformatics student based in Yerevan, Armenia OwO/
+        Hello, Hallo, Привет, こんにちは! I&apos;m a Datascientist and Bioinformatics student based in Yerevan, Armenia OwO/
       </Box>
 
       <Box display={{ md: 'flex' }}>
@@ -137,13 +137,13 @@ const Home = () => (
         <i><b>Languages:</b></i>
         </Paragraph>
         <Paragraph>
-         <b>Russian: </b>Native, <b>German: </b>Upper-intermediate, <b>English: </b>Upper-intermediate, <b>Japanese: </b>Basic.
+         <b>Russian: </b>Native,\n<b>German: </b>Upper-intermediate,\n<b>English: </b>Upper-intermediate,\n<b>Japanese: </b>Basic.
         </Paragraph>
         <Paragraph>
         <i><b>Programming skills and languages:</b></i>
         </Paragraph>
         <Paragraph>
-         <b>Python:</b> (Pytorch, NumPy, Pandas, scikit-learn, PyMol, SeaBorn, Luigi), <b>R:</b> (tidyverse, ggplot2, caret), HTML, CSS, JavaScript, SQL, Google and Yandex cloud.
+         <b>Python:</b> (Pytorch, NumPy, Pandas, scikit-learn, PyMol, SeaBorn, Luigi, Snakemake),\n<b>R:</b> (tidyverse, ggplot2, caret), HTML, CSS, JavaScript, SQL, Google and Yandex cloud.
         </Paragraph>
       </Section>
       
