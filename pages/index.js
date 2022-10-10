@@ -123,7 +123,7 @@ const Home = () => (
           Max Delbrück Center for Molecular Medicine: Online course Computational Genomics: Hands-on course on Machine Learning for Genomics, Computational Genomics in R
         </BioSection>
         <BioSection>
-          <BioYear>2018-2024</BioYear>
+          <BioYear>2018-2025</BioYear>
           Studying at Lomonosov Moscow State University faculty of Bioengineering and Bioinformatics.
         </BioSection>
       </Section>
@@ -137,14 +137,23 @@ const Home = () => (
         <i><b>Languages:</b></i>
         </Paragraph>
         <Paragraph>
-         <b>Russian: </b>Native,\n<b>German: </b>Upper-intermediate,\n<b>English: </b>Upper-intermediate,\n<b>Japanese: </b>Basic.
+         <b>Russian: </b>Native,<br><b>German: </b>Upper-intermediate,<br><b>English: </b>Upper-intermediate,<br><b>Japanese: </b>Basic.
         </Paragraph>
         <Paragraph>
         <i><b>Programming skills and languages:</b></i>
         </Paragraph>
         <Paragraph>
-         <b>Python:</b> (Pytorch, NumPy, Pandas, scikit-learn, PyMol, SeaBorn, Luigi, Snakemake),\n<b>R:</b> (tidyverse, ggplot2, caret), HTML, CSS, JavaScript, SQL, Google and Yandex cloud.
+         <b>Python:</b> (Pytorch, NumPy, Pandas, scikit-learn, PyMol, SeaBorn, Luigi, Snakemake),<br><b>R:</b> (tidyverse, ggplot2, caret), HTML, CSS, JavaScript, SQL, Google and Yandex cloud.
         </Paragraph>
+
+        <Box align="center" my={4}>
+          <NextLink href="/works">
+            <Button rightIcon={<ChevronRightIcon />} colorScheme="green">
+              Works
+            </Button>
+          </NextLink>
+        </Box>
+
       </Section>
       
       <Section delay={0.3}>
@@ -206,14 +215,6 @@ const Home = () => (
             </Link>
           </ListItem>
         </List>
-
-        <Box align="center" my={4}>
-          <NextLink href="/works">
-            <Button rightIcon={<ChevronRightIcon />} colorScheme="green">
-              Works
-            </Button>
-          </NextLink>
-        </Box>
 
 	<Box align="center" my={4}>
           <NextLink href="https://www.buymeacoffee.com/kosar">
