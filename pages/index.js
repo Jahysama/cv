@@ -70,7 +70,7 @@ const Home = () => (
           Bio
         </Heading>
         <Paragraph>
-          Hi again! I'm a student at Lomonosov Moscow State University. I'm passionate about Machine learning and often hang out on kaggle searching for new datasets. I also like to apply my skills in computational and structural biology. In a free time i make simple indie games using python. Linux enthusiast and open source software contributor(I use Arch btw).
+          Hi again! I'm a student at Lomonosov Moscow State University. I'm passionate about Machine learning and often hang out on kaggle searching for new datasets. I also like to apply my skills in computational and structural biology. In a free time i make simple indie games using python. Linux enthusiast and open source software contributor(I use Void btw).
         </Paragraph>
       </Section>
 
