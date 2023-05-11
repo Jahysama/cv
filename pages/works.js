@@ -8,6 +8,8 @@ import Fuuka from '../public/images/works/Fuuka.png'
 import BoardGames from '../public/images/works/board.jpg'
 import WrongGen from '../public/images/works/wrongen.jpeg'
 import CompTech from '../public/images/works/comp.png'
+import Vtuber from '../public/images/works/vtuber.png'
+import Unibot from '../public/images/works/unibot.png'
 
 
 const Works = () => (
@@ -26,6 +28,16 @@ const Works = () => (
         <Section>
           <GridItem href="https://github.com/comptech-winter-school/genetic-potioncraft" title="Genetic Potion" thumbnail={CompTech}>
             Scikit-learn ML enhancer based on genetic algorithms.
+          </GridItem>
+        </Section>
+        <Section>
+          <GridItem href="" title="Open Source AI Vtuber (WIP)" thumbnail={CompTech}>
+            AI pipline that combines open source models to make a Virtual Youtuber with understanding os what is happening on the screen, individual viewer chat history and context extracting to stay up to date with all the news.
+          </GridItem>
+        </Section>
+        <Section>
+          <GridItem href="" title="UniChatBot" thumbnail={Unibot}>
+            Universal chatbot application that can write stuff in various GUI chats for you.
           </GridItem>
         </Section>
      
