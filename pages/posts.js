@@ -38,6 +38,13 @@ const Publications = () => (
             href="https://doi.org/10.14341/CBAI-2022-44"
           />
          </Section>
+          <Section>
+          <GridItem
+            title="Efficacy of federated learning on genomic data: a study on the UK Biobank and the 1000 Genomes Project"
+            thumbnail={FED}
+            href="https://www.medrxiv.org/content/10.1101/2023.01.24.23284898v2"
+          />
+         </Section>
         </SimpleGrid>
     </Container>
   </Layout>
