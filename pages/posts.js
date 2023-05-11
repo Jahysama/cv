@@ -6,6 +6,7 @@ import { GridItem } from '../components/grid-item'
 import GRAPE from '../public/images/contents/grape.jpg'
 import MUTS from '../public/images/contents/muts.jpg'
 import CONF from '../public/images/contents/conf.jpg'
+import FED from '../public/images/contents/FED.jpg'
 
 const Publications = () => (
   <Layout title="Publications">
