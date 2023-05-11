@@ -76,15 +76,15 @@ const Home = () => (
 
 <Section delay={0.2}>
         <Heading as="h3" variant="section-title">
-          Lab
+          Work at DevSect
         </Heading>
         <Paragraph>
-         Currently studying Tenebrio bugs digestive enzymes. Building de novo protein structures and finding ligand interactions with PyMol and docking tools. Previously worked with MutS protein which is part of DNA reparation system.
+         Building AI infrastructure from ground up with help of Docker, AirFlow/Langchain, Kubernetes, PostgreSQL and FastAPI. Responsible for researching, finetuning Llama and other LLMs, text classificators to develop most efficient talking head pipeline enhancing user engaging in chatbot mobile app.
           </Paragraph>
         <Box align="center" my={4}>
-          <NextLink href="/posts">
+          <NextLink href="https://sect.dev/">
             <Button rightIcon={<ChevronRightIcon />} colorScheme="green">
-              My Publications
+              DevSect
             </Button>
           </NextLink>
         </Box>
@@ -95,12 +95,19 @@ const Home = () => (
           Work at GENXT
         </Heading>
         <Paragraph>
-         I'm developing pipeline for pedigree simulation with unrelated founders, relatedness degrees estimation and compare between true and estimated degrees. In my work I actively use ERSA, KING, IBIS, Ped-Sim with samtools inside Snakemake. Important part of my work is also pipeline speed enhancement, which requires computing power estimation and optimization. I'm also involved in Federated machine learning engine research for phenotype prediction based on SNV data. Working with XGBoost, Random Forest and MLP models fine tuning.
+         I have developed and held responsible for testing of pipeline of pedigree simulation with unrelated founders, relatedness degrees estimation and compare between true and estimated degrees. In my work I actively use ERSA, KING, IBIS, Ped-Sim with samtools inside Snakemake. Important part of my work is also pipeline speed enhancement, which requires computing power estimation and optimization. I'm also involved in Federated machine learning engine research for phenotype prediction based on SNV data. Working with XGBoost, Random Forest and MLP models fine tuning.
           </Paragraph>
         <Box align="center" my={4}>
           <NextLink href="https://genxt.network/">
             <Button rightIcon={<ChevronRightIcon />} colorScheme="green">
               GENXT
+            </Button>
+          </NextLink>
+        </Box>
+        <Box align="center" my={4}>
+          <NextLink href="/posts">
+            <Button rightIcon={<ChevronRightIcon />} colorScheme="green">
+              My Publications
             </Button>
           </NextLink>
         </Box>
@@ -115,8 +122,12 @@ const Home = () => (
 	Working as a junior manager at Wanta Group.
         </BioSection>
 	<BioSection>
-          <BioYear>2021-present</BioYear>
-	Working as a junior bioinformatician at GenX.
+          <BioYear>2021-2023</BioYear>
+	Working as a bioinformatician at GENXT.
+        </BioSection>
+	<BioSection>
+          <BioYear>2023-present</BioYear>
+	Working as a Ml- and Data- Engineer at DevSect.
         </BioSection>
         <BioSection>
           <BioYear>2021</BioYear>
@@ -142,9 +153,18 @@ const Home = () => (
         <Paragraph>
         <i><b>Programming skills and languages:</b></i>
         </Paragraph>
+	<Paragraph>
+	<b>Python:</b> Pytorch, NumPy, Pandas, Polars, scikit-learn, PyMol, SeaBorn, Luigi, Snakemake, FastAPI
+	</Paragraph>
+	<Paragraph>
+	<b>Cloud and Databases:</b> Google cloud, Yandex cloud, Docker, Kubernetes, PostgreSQL, Airflow, Luigi, Hadoop, Mlflow, Kafka
+	</Paragraph>
         <Paragraph>
-         <b>Python:</b> (Pytorch, NumPy, Pandas, scikit-learn, PyMol, SeaBorn, Luigi, Snakemake), <b>R:</b> (tidyverse, ggplot2, caret), HTML, CSS, JavaScript, SQL, Google and Yandex cloud.
+         <b>R:</b> tidyverse, ggplot2, caret
         </Paragraph>
+	<Paragraph>
+	<b>Web:</b> HTML, CSS, JavaScript, FastAPI
+	</Paragraph>
 
         <Box align="center" my={4}>
           <NextLink href="/works">
@@ -169,17 +189,6 @@ const Home = () => (
                 
               >
                 Head Hunter
-              </Button>
-            </Link>
-          </ListItem>
-          <ListItem>
-            <Link href="https://www.upwork.com/freelancers/~01c39f9ac5439b8645" target="_blank">
-              <Button
-                variant="ghost"
-                colorScheme="green"
-                
-              >
-                UpWork
               </Button>
             </Link>
           </ListItem>
