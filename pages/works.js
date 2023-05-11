@@ -9,7 +9,7 @@ import BoardGames from '../public/images/works/board.jpg'
 import WrongGen from '../public/images/works/wrongen.jpeg'
 import CompTech from '../public/images/works/comp.png'
 import Vtuber from '../public/images/works/vtuber.png'
-import Unibot from '../public/images/works/unibot.png'
+import Unibot from '../public/images/works/unibot.jpg'
 
 
 const Works = () => (
