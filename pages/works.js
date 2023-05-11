@@ -31,7 +31,7 @@ const Works = () => (
           </GridItem>
         </Section>
         <Section>
-          <GridItem href="" title="Open Source AI Vtuber (WIP)" thumbnail={CompTech}>
+          <GridItem href="" title="Open Source AI Vtuber (WIP)" thumbnail={Vtuber}>
             AI pipline that combines open source models to make a Virtual Youtuber with understanding os what is happening on the screen, individual viewer chat history and context extracting to stay up to date with all the news.
           </GridItem>
         </Section>
