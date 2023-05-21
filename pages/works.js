@@ -31,12 +31,12 @@ const Works = () => (
           </GridItem>
         </Section>
         <Section>
-          <GridItem href="" title="Open Source AI Vtuber (WIP)" thumbnail={Vtuber}>
+          <GridItem href="https://github.com/Jahysama/aivtuber" title="Open Source AI Vtuber (WIP)" thumbnail={Vtuber}>
             AI pipline that combines open source models to make a Virtual Youtuber with understanding of what is happening on the screen, individual viewer chat history and context extracting to stay up to date with all the news.
           </GridItem>
         </Section>
         <Section>
-          <GridItem href="" title="UniChatBot" thumbnail={Unibot}>
+          <GridItem href="https://github.com/Jahysama/UniChatBot" title="UniChatBot" thumbnail={Unibot}>
             Universal chatbot application that can write stuff in various GUI chats for you.
           </GridItem>
         </Section>
