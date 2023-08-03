@@ -20,7 +20,7 @@ const Works = () => (
         Works
       </Heading>
 
-      <SimpleGrid columns={[1, 1, 2]} gap={6}>
+      <SimpleGrid columns={[1, 1, 3]} gap={6}>
         <Section>
           <GridItem href="https://github.com/Jahysama/Fuuka" title="Fuuka discord bot" thumbnail={Fuuka}>
             A Deep Learning chat bot that can generate various pictures and talk to people.
