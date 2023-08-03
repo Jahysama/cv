@@ -157,7 +157,7 @@ const Home = () => (
 	<b>Python:</b> Pytorch, NumPy, Pandas, Polars, scikit-learn, PyMol, SeaBorn, Luigi, Snakemake, FastAPI
 	</Paragraph>
 	<Paragraph>
-	<b>Cloud and Databases:</b> Google cloud, Yandex cloud, Docker, Kubernetes, PostgreSQL, Airflow, Luigi, Hadoop, Mlflow, Kafka
+	<b>Cloud and Databases:</b> Google cloud, Yandex cloud, Docker, Kubernetes, PostgreSQL, Airflow, Luigi, Hadoop, Mlflow
 	</Paragraph>
         <Paragraph>
          <b>R:</b> tidyverse, ggplot2, caret
