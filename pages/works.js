@@ -10,6 +10,7 @@ import WrongGen from '../public/images/works/wrongen.jpeg'
 import CompTech from '../public/images/works/comp.png'
 import Vtuber from '../public/images/works/vtuber.png'
 import Unibot from '../public/images/works/unibot.jpg'
+import Nuzdiki from '../public/images/works/zuz.jpg'
 
 
 const Works = () => (
@@ -40,7 +41,11 @@ const Works = () => (
             Universal chatbot application that can write stuff in various GUI chats for you.
           </GridItem>
         </Section>
-     
+      <Section>
+          <GridItem href="https://www.twitch.tv/aixander_zuzdin" title="AI Nuzdiki" thumbnail={Nuzdiki}>
+            AI generates short jokes that replicate the style and voice of Alexander Nuzdin from back of the days.
+          </GridItem>
+        </Section>
       </SimpleGrid>
 
       <Section delay={0.2}>
