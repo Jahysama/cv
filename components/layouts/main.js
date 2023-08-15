@@ -17,7 +17,7 @@ const Main = ({ children, router }) => {
       <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="description" content="Egor's homepage" />
-        <meta name="author" content="Egor Kosaretskiy" />
+        <meta name="author" content="Egor Kosaretsky" />
         <meta name="author" content="kosar" />
         <link rel="apple-touch-icon" href="apple-touch-icon.png" />
         <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
