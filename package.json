@@ -4,7 +4,7 @@
   "description": "Egor's website ",
   "scripts": {
     "dev": "next dev -H 0.0.0.0",
-    "build": "next --openssl-legacy-provider build",
+    "build": "next build --openssl-legacy-provider",
     "prettier": "prettier -write .",
     "lint": "next lint"
   },
