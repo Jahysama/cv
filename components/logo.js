@@ -31,7 +31,7 @@ const Logo = () => {
             fontWeight="bold"
             ml={3}
           >
-            Egor Kosaretskiy
+            Egor Kosaretsky
           </Text>
         </LogoBox>
       </a>
