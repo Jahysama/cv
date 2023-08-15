@@ -206,7 +206,7 @@ const Home = () => (
         </Heading>
         <List>
           <ListItem>
-            <Link href="mailto:megametagross@outlook.de" target="_blank">
+            <Link href="mailto:egor@kosaretsky.co.uk" target="_blank">
               <Button
                 variant="ghost"
                 colorScheme="green"
