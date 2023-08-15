@@ -1,4 +1,5 @@
 import NextLink from 'next/link'
+import Head from 'next/head'
 import {
   Link,
   Container,
@@ -28,9 +29,9 @@ import {
 
 const Home = () => (
   <Layout>
-	<Helmet>
-  	<meta name="yandex-verification" content="7f159ff75782b5a5"/>
-    	</Helmet>
+	<Head>
+        <meta name="yandex-verification" content="7f159ff75782b5a5" />
+      </Head>
     <Container>
       <Box
         borderRadius="lg"
