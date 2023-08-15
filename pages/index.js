@@ -27,6 +27,9 @@ import {
 } from 'react-icons/io5'
 
 const Home = () => (
+	<Helmet>
+  	<meta name="yandex-verification" content="7f159ff75782b5a5" />
+    	</Helmet>
   <Layout>
     <Container>
       <Box
