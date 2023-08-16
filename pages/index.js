@@ -49,8 +49,10 @@ const Home = () => (
             Egor Kosaretsky
           </Heading>
           <p> Bioinformatician / Data Scientist </p>
-	<NextLink href="../cv.pdf">
-		<p>Download one page CV</p>
+	<NextLink href="https://raw.githubusercontent.com/Jahysama/cv/1ec441d5e6edd91d1056683afac90029a5c74fdb/cv.pdf">
+		<Button rightIcon={<ChevronRightIcon />} colorScheme="purple">
+              Dwonload One Page CV
+            </Button>
           </NextLink>
         </Box>
         <Box
