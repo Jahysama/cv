@@ -49,6 +49,9 @@ const Home = () => (
             Egor Kosaretsky
           </Heading>
           <p> Bioinformatician / Data Scientist </p>
+	<NextLink href="../cv.pdf">
+		<p>Download one page CV</p>
+          </NextLink>
         </Box>
         <Box
           flexShrink={0}
