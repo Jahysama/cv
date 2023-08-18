@@ -222,7 +222,7 @@ const Home = () => (
             </Link>
           </ListItem>
           <ListItem>
-            <Link href="https://www.linkedin.com/in/egor-kosaretskiy-841789223" target="_blank">
+            <Link href="https://www.linkedin.com/in/egor-kosaretsky-841789223" target="_blank">
               <Button
                 variant="ghost"
                 colorScheme="green"
