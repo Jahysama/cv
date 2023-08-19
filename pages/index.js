@@ -1,5 +1,6 @@
 import NextLink from 'next/link'
 import Head from 'next/head'
+import PDF from '../cv.pdf'
 import {
   Link,
   Container,
@@ -49,7 +50,7 @@ const Home = () => (
             Egor Kosaretsky
           </Heading>
           <p> Bioinformatician / Data Scientist </p>
-	<NextLink href="https://raw.githubusercontent.com/Jahysama/cv/1ec441d5e6edd91d1056683afac90029a5c74fdb/cv.pdf">
+	<NextLink href="../cv.pdf">
 		<Button rightIcon={<ChevronRightIcon />} colorScheme="purple">
               Dwonload One Page CV
             </Button>
