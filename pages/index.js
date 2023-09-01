@@ -49,7 +49,7 @@ const Home = () => (
             Egor Kosaretsky
           </Heading>
           <p> Bioinformatician / Data Scientist </p>
-	<NextLink href="https://drive.google.com/file/d/1qM3xvYPx5W2dgJkzLydmk1wWb9pf8_NC/view">
+	<NextLink href="https://drive.google.com/file/d/1xc71ohz2_pbRdr-Rjb2kgllUfNvHezYh/view">
 		<Button rightIcon={<ChevronRightIcon />} colorScheme="purple">
               Dwonload One Page CV
             </Button>
