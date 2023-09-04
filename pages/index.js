@@ -51,7 +51,7 @@ const Home = () => (
           <p> Bioinformatician / Data Scientist </p>
 	<NextLink href="https://drive.google.com/file/d/1xc71ohz2_pbRdr-Rjb2kgllUfNvHezYh/view">
 		<Button rightIcon={<ChevronRightIcon />} colorScheme="purple">
-              Dwonload One Page CV
+              Download One Page CV
             </Button>
           </NextLink>
         </Box>
