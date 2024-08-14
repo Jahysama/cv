@@ -122,7 +122,7 @@ resource "google_compute_health_check" "default" {
   timeout_sec        = 5
 
   http_health_check {
-    port = var.http_port[0]
+    port = 80
   }
 }
 
@@ -138,7 +138,7 @@ resource "google_compute_instance_group" "webservers" {
 
   named_port {
     name = "http"
-    port = var.http_port[0]
+    port = 80
   }
 }
 
