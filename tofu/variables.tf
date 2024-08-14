@@ -33,13 +33,6 @@ variable "docker_image" {
   default     = "thatbagu/website"
 }
 
-variable "http_port" {
-  description = "Ports to allow for web traffic"
-  type        = list(string)
-  default     = ["80", "443"]
-
-}
-
 variable "tf_state_bucket" {
   description = "The name of the GCS bucket for Terraform state"
   type        = string
