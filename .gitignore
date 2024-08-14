@@ -28,3 +28,9 @@ archive.zip
 
 # macOS
 .DS_Store
+
+
+# Other standard Terraform ignores
+*.tfstate
+*.tfstate.*
+.terraform/

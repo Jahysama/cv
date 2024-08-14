@@ -38,3 +38,9 @@ variable "http_port" {
   type        = number
   default     = 8000
 }
+
+variable "tf_state_bucket" {
+  description = "The name of the GCS bucket for Terraform state"
+  type        = string
+  default     = "tofu-state-243"
+}
