@@ -1,0 +1,246 @@
+#main-content {
+    background-color: var(--mantle);
+    border: 1px solid var(--green);
+    border-radius: 5px;
+    padding: 20px;
+    flex-grow: 1;
+    overflow-y: auto;
+}
+
+#main-content p {
+    margin-bottom: 15px;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+}
+
+.profile-container {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 20px;
+}
+
+.profile-img {
+  width: 200px;
+  height: auto;
+  margin-right: 20px;
+  border-radius: 10%;
+}
+
+.summary {
+  flex: 1;
+}
+
+nav {
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+nav button {
+    background-color: var(--surface0);
+    color: var(--text);
+    border: 1px solid var(--lavender);
+    border-radius: 5px;
+    padding: 8px 16px;
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+nav button:hover {
+    background-color: var(--surface1);
+    color: var(--rosewater);
+    transform: translateY(-2px);
+    box-shadow: 0 2px 5px rgba(203, 166, 247, 0.3); /* Slight mauve shadow */
+}
+
+nav button:active {
+    transform: translateY(0);
+    box-shadow: none;
+    background-color: var(--surface2);
+}
+
+nav a {
+    min-width: 100px;
+    text-align: center;
+}
+
+.contact-form {
+    background-color: var(--surface0);
+    border: 1px solid var(--green);
+    border-radius: 10px;
+    padding: 20px;
+    max-width: 500px;
+    margin: 0 auto;
+    box-sizing: border-box;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    color: var(--subtext0);
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid var(--surface2);
+    border-radius: 5px;
+    background-color: var(--base);
+    color: var(--text);
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    box-sizing: border-box;
+}
+
+.form-group textarea {
+    height: 100px;
+    resize: vertical;
+}
+
+
+.submit-btn {
+    background-color: var(--green);
+    color: var(--base);
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-family: 'Courier New', monospace;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.submit-btn:hover {
+    background-color: var(--teal);
+    transform: translateY(-2px);
+    box-shadow: 0 2px 5px rgba(166, 227, 161, 0.4);
+}
+
+.submit-btn:active {
+    transform: translateY(0);
+    box-shadow: none;
+}
+
+.connect-info {
+    margin-top: 30px;
+}
+
+.connect-info h3 {
+    color: var(--blue);
+    border-bottom: 1px solid var(--blue);
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+}
+
+.connect-info ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.connect-info li {
+    margin-bottom: 10px;
+}
+
+.text-link {
+    background-color: transparent;
+    color: var(--green);
+    padding: 0;
+    font-size: inherit;
+    text-decoration: underline;
+}
+
+.text-link:hover {
+    color: var(--teal);
+    transform: none;
+    box-shadow: none;
+}
+
+#crow {
+position: absolute;
+top: 20px;
+right: 20px;
+font-family: monospace;
+font-size: 12px;
+white-space: pre;
+color: var(--lavender);
+}
+
+.mountains-and-name {
+    display: inline-block; /* To keep the block centered */
+    text-align: center;
+}
+
+#ascii-mountains {
+    margin-bottom: -40px; /* Negative margin to pull the name up */
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+}
+
+#ascii-mountains pre {
+    font-family: monospace;
+    font-size: 14px;
+    line-height: 1;
+    color: var(--lavender);
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    white-space: pre;
+    word-wrap: normal;
+    overflow-wrap: normal;
+}
+
+#ascii-mountains pre::selection {
+    background-color: transparent;
+}
+
+.social-links {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.social-links a {
+    background-color: transparent;
+    padding: 0;
+    transition: transform 0.3s ease;
+}
+
+.social-links a:hover {
+    background-color: transparent;
+    transform: translateY(-3px);
+    box-shadow: none;
+}
+
+.social-links svg {
+    width: 24px;
+    height: 24px;
+    fill: none;
+    stroke: var(--lavender);
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    transition: stroke 0.3s ease;
+}
+
+.social-links a:hover svg {
+    stroke: var(--mauve);
+}
+
+

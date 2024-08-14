@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Egor Kosaretsk - personal website</title>
+    <link rel="stylesheet" href="/styles/main.css">
+    <link rel="icon" type="image/svg+xml" href="/assets/index/favicon.svg">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/htmx/1.9.6/htmx.min.js"></script>
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@catppuccin/highlightjs@0.2.2/css/catppuccin-mocha.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="/scripts/search.js" defer></script>
+    <script src="/scripts/crow.js" defer></script>
+    <script src="/scripts/event-listener.js" defer></script>
+    <script src="/scripts/mastodon.js" defer></script>
+
+</head>
+<body>
+        <div class="container">
+        <header>
+        <div class="mountains-and-name">
+            <div id="ascii-mountains">
+                <pre>
+         .       /\  *     .        *      ./\    /\
+    *        /\^     /^^\     /\  /\      /\    /  \  /  \   .
+    *    /^   \/\/ /\ \   /  \/  \  /\/  \  /    \/    \
+     /\    /  \  /  \/  \  \/    /   \/      \/         /\  /\
+   /\/  \  /    \/    \   \ /    /\   /      /  /\      /  \/  \
+   /  \   \/      \    /    /    /  \ /      /  /  \    /        \
+   /    \  /       /   /    /    /    /      /  /    \  /    /\    \
+                </pre>
+            </div>
+            <h1>Egor Kosaretsky</h1>
+          </div>
+            <nav>
+                <button hx-get="/home" hx-target="#main-content">Home</button>
+                <button hx-get="/about" hx-target="#main-content">About</button>
+                <button hx-get="/projects" hx-target="#main-content">Projects</button>
+                <button hx-get="/contact" hx-target="#main-content">Contact</button>
+                <button hx-get="/blog" hx-target="#main-content">Blog</button>
+            </nav>
+            <div class="social-links">
+                            <a href="https://t.me/that_bag" target="_blank" rel="noopener noreferrer" aria-label="Telegram">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M21.5 2l-18.5 9 6 3M21.5 2l-7.5 18.5-3.5-8.5M21.5 2L9.5 13.5"/>
+                                </svg>
+                            </a>
+                            <a href="https://github.com/Jahysama" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
+                                </svg>
+                            </a>
+                            <a href="https://mastodon.social/@ThatBagu" target="_blank" rel="noopener noreferrer" aria-label="Mastodon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M21.58 13.913c-.29 1.469-2.592 3.121-5.238 3.396-1.379.184-2.737.368-4.185.276-2.368-.092-4.237-.551-4.237-.551 0 .225.014.439.043.642.308 2.294 2.317 2.432 4.222 2.494 1.924.031 3.641-.46 3.641-.46l.079 1.708s-1.344.806-3.736.959c-1.32.086-2.96-.031-4.87-.511-4.145-1.023-4.867-5.139-4.975-9.323-.03-1.043-.012-2.025-.012-2.847 0-3.574 2.341-4.622 2.341-4.622 1.18-.54 3.204-.771 5.311-.788h.051c2.108.017 4.133.248 5.312.788 0 0 2.341 1.048 2.341 4.622 0 0 .029 2.634-.088 4.454z"/>
+                                    <path d="M17.832 7.674c0-1.023-.828-1.855-1.847-1.855-1.021 0-1.848.832-1.848 1.855 0 1.023.827 1.854 1.848 1.854 1.019 0 1.847-.831 1.847-1.854z"/>
+                                </svg>
+                            </a>
+                            <a href="https://x.com/thatbagu" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/>
+                                </svg>
+                            </a>
+                            <a href="/atom.xml" target="_blank" rel="noopener noreferrer" aria-label="RSS">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M4 11a9 9 0 0 1 9 9"></path>
+                                    <path d="M4 4a16 16 0 0 1 16 16"></path>
+                                    <circle cx="5" cy="19" r="1"></circle>
+                                </svg>
+                            </a>
+                        </div>
+            <div id="crow"></div>
+        </header>
+
+        <div id="terminal">
+            <div id="output"></div>
+            <div id="input-line">
+                <span class="prompt"></span>
+                <input type="text" id="input" autofocus>
+            </div>
+        </div>
+
+        <main id="main-content" role="main"></main>
+
+        <footer>
+            <p>© 2024 Egor Kosaretsky</p>
+        </footer>
+    </div>
+</body>
+</html>

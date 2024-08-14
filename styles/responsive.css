@@ -1,0 +1,79 @@
+@media (max-width: 768px) {
+    nav {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    nav a {
+        width: 100%;
+        max-width: 200px;
+    }
+
+}
+
+@media (max-width: 768px) {
+    .contact-form {
+        max-width: 100%;
+        padding: 15px;
+    }
+
+    .form-group input,
+    .form-group textarea {
+        font-size: 16px; /* Prevents zoom on mobile devices */
+    }
+}
+
+@media (max-width: 1024px) {
+    #ascii-mountains pre {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 768px) {
+    #ascii-mountains pre {
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    #ascii-mountains pre {
+        font-size: 10px;
+    }
+}
+
+@media (max-width: 320px) {
+    #ascii-mountains pre {
+        font-size: 8px;
+    }
+}
+
+@media (max-width: 280px) {
+    #ascii-mountains pre {
+        font-size: 6px;
+    }
+}
+
+@media (max-width: 768px) {
+    img {
+        max-width: 90%;
+    }
+}
+
+@media (max-width: 480px) {
+    img {
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 600px) {
+  .profile-container {
+    flex-direction: column;
+  }
+  
+  .profile-img {
+    margin-right: 0;
+    margin-bottom: 20px;
+  }
+}
+
+

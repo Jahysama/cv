@@ -1,0 +1,130 @@
+#terminal {
+    background-color: var(--crust);
+    border: 1px solid var(--lavender);
+    border-radius: 5px;
+    padding: 10px;
+    height: 300px;
+    overflow-y: auto;
+    margin-bottom: 20px;
+    font-family: 'Courier New', monospace;
+}
+
+#output {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    color: var(--text);
+}
+
+.prompt {
+    color: var(--green);
+}
+
+.prompt::before {
+    content: "guest@cool:~$ ";
+    color: var(--green);
+}
+
+#input-line {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+}
+
+#input {
+    flex-grow: 1;
+    background-color: transparent;
+    border: none;
+    color: var(--text);
+    font-family: 'Courier New', monospace;
+    font-size: 16px;
+    outline: none;
+}
+
+.terminal-welcome {
+    color: var(--blue);
+                                   font-weight: bold;
+}
+
+.terminal-prompt {
+    color: var(--green);
+}
+
+.terminal-command {
+    color: var(--mauve);
+    font-weight: bold;
+}
+
+.terminal-error {
+    color: var(--red);
+}
+
+.terminal-success {
+    color: var(--green);
+}
+
+.terminal-info {
+    color: var(--sapphire);
+}
+
+.terminal-warning {
+    color: var(--peach);
+}
+
+.terminal-help {
+    color: var(--yellow);
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.terminal-autocomplete {
+    color: var(--sky);
+    font-style: italic;
+}
+
+.terminal-results {
+    margin-top: 2px;
+    margin-bottom: 2px;
+}
+
+.terminal-result {
+    margin-bottom: 1px;
+    line-height: 1.2;
+}
+
+.result-number {
+    color: #f0a830;
+}
+
+.result-file {
+    color: #4f9cfe;
+}
+
+.result-excerpt {
+    color: #a0a0a0;
+}
+
+.terminal-success {
+    color: #4CAF50;
+    margin-bottom: 2px;
+}
+
+.terminal-warning {
+    color: #FFC107;
+}
+
+.terminal-error {
+    color: #F44336;
+}
+
+.terminal-info {
+    color: #2196F3;
+    margin-bottom: 2px;
+}
+
+#output > div {
+    margin-bottom: 2px;
+}
+mark {
+    background-color: yellow !important;
+    color: black !important;
+}
