@@ -43,14 +43,7 @@ jobs:
       - name: OpenTofu Validate
         run: tofu validate -no-color
 
-      - name: Check for OpenTofu Changes
-        id: check_changes
-        run: |
-          tofu plan -detailed-exitcode -no-color
-        continue-on-error: true
-
       - name: OpenTofu Plan
-        if: steps.check_changes.outcome == 'failure'
         run: tofu plan -no-color
         env:
           TF_VAR_project_id: ${{ secrets.GCP_PROJECT_ID }}
@@ -58,7 +51,7 @@ jobs:
           TF_VAR_image_tag: ${{ github.sha }}
 
       - name: OpenTofu Apply
-        if: github.ref == 'refs/heads/main' && github.event_name == 'push' && steps.check_changes.outcome == 'failure'
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
         run: tofu apply -auto-approve -no-color
         env:
           TF_VAR_project_id: ${{ secrets.GCP_PROJECT_ID }}
