@@ -1,18 +1,26 @@
 # Configure the Google Cloud provider
 provider "google" {
-  project = "your-project-id"
-  region  = "us-central1"
-  zone    = "us-central1-a"
+  project = var.project_id
+  region  = var.region
+  zone    = var.zone
+}
+
+# Configure the GCS backend
+terraform {
+  backend "gcs" {
+    bucket = "tofu-state"
+    prefix = "terraform/state"
+  }
 }
 
 # Create a GCP Compute Engine instance
 resource "google_compute_instance" "website_instance" {
-  name         = "website-instance"
-  machine_type = "e2-micro"
+  name         = local.instance_name
+  machine_type = var.machine_type
 
   boot_disk {
     initialize_params {
-      image = "cos-cloud/cos-stable"
+      image = var.boot_disk_image
     }
   }
 
@@ -20,53 +28,34 @@ resource "google_compute_instance" "website_instance" {
     network = "default"
 
     access_config {
-      // Ephemeral IP
+      nat_ip = google_compute_address.static_ip.address
     }
   }
 
   metadata = {
-    gce-container-declaration = <<EOF
-spec:
-  containers:
-    - image: 'gcr.io/${var.project_id}/${var.image_name}:${var.image_tag}'
-      name: website
-      ports:
-        - containerPort: 80
-EOF
+    gce-container-declaration = templatefile("${path.module}/container-spec.yaml", {
+      docker_image = var.docker_image
+    })
   }
 
   tags = ["http-server"]
 }
 
+# Create a static IP address
+resource "google_compute_address" "static_ip" {
+  name = local.static_ip_name
+}
+
 # Allow HTTP traffic
 resource "google_compute_firewall" "allow_http" {
-  name    = "allow-http"
+  name    = local.firewall_rule_name
   network = "default"
 
   allow {
     protocol = "tcp"
-    ports    = ["80"]
+    ports    = [var.http_port]
   }
 
   source_ranges = ["0.0.0.0/0"]
   target_tags   = ["http-server"]
-}
-
-# Variables
-variable "project_id" {
-  description = "Your GCP project ID"
-}
-
-variable "image_name" {
-  description = "Name of your Docker image"
-}
-
-variable "image_tag" {
-  description = "Tag of your Docker image"
-  default     = "latest"
-}
-
-# Output the external IP of the instance
-output "website_url" {
-  value = google_compute_instance.website_instance.network_interface[0].access_config[0].nat_ip
 }
