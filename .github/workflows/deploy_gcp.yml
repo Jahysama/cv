@@ -7,7 +7,7 @@ on:
 env:
   DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
   GCE_INSTANCE: website-instance
-  GCE_INSTANCE_ZONE: us-central1-a
+  GCE_INSTANCE_ZONE: europe-west4-a
 
 jobs:
   build-publish-deploy:
