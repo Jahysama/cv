@@ -8,7 +8,7 @@ provider "google" {
 # Configure the GCS backend
 terraform {
   backend "gcs" {
-    bucket = "tofu-state"
+    bucket = "tofu-state-243"
     prefix = "terraform/state"
   }
 }
