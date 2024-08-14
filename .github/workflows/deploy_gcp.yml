@@ -29,7 +29,9 @@ jobs:
         with:
           context: .
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/website:${{ github.sha }}
+          tags: |
+            ${{ secrets.DOCKERHUB_USERNAME }}/website:${{ github.sha }}
+            ${{ secrets.DOCKERHUB_USERNAME }}/website:latest
 
       # Setup gcloud CLI
       - uses: google-github-actions/setup-gcloud@v0
