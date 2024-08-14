@@ -34,9 +34,10 @@ variable "docker_image" {
 }
 
 variable "http_port" {
-  description = "The port to allow HTTP traffic on"
-  type        = number
-  default     = 443
+  description = "Ports to allow for web traffic"
+  type        = list(string)
+  default     = ["80", "443"]
+
 }
 
 variable "tf_state_bucket" {
