@@ -1,79 +1,128 @@
+/* Base styles */
+body, html {
+    font-size: 16px; /* Base font size for better readability on mobile */
+}
+
+/* Responsive layout */
+@media (max-width: 768px) {
+    .container {
+        padding: 10px; /* Reduce padding on smaller screens */
+    }
+
+    #main-content {
+        padding: 15px;
+    }
+
+    h1 {
+        font-size: 2em; /* Slightly smaller heading on mobile */
+    }
+
+    h2 {
+        font-size: 1.5em;
+    }
+}
+
+/* Improved navigation for mobile */
 @media (max-width: 768px) {
     nav {
         flex-direction: column;
-        align-items: center;
+        align-items: stretch;
     }
 
-    nav a {
+    nav button, nav a {
         width: 100%;
-        max-width: 200px;
+        margin-bottom: 10px;
+        text-align: center;
     }
-
 }
 
+/* Responsive form */
 @media (max-width: 768px) {
     .contact-form {
-        max-width: 100%;
         padding: 15px;
     }
 
     .form-group input,
     .form-group textarea {
-        font-size: 16px; /* Prevents zoom on mobile devices */
+        font-size: 16px;
+        padding: 12px; /* Larger touch targets */
+    }
+
+    .submit-btn {
+        width: 100%; /* Full-width button on mobile */
+        padding: 12px;
     }
 }
 
-@media (max-width: 1024px) {
-    #ascii-mountains pre {
-        font-size: 14px;
-    }
-}
-
+/* Responsive grid layouts */
 @media (max-width: 768px) {
-    #ascii-mountains pre {
-        font-size: 12px;
+    .projects-grid,
+    .blog-grid {
+        grid-template-columns: 1fr; /* Single column on mobile */
+        gap: 15px;
     }
 }
 
-@media (max-width: 480px) {
-    #ascii-mountains pre {
-        font-size: 10px;
-    }
-}
-
-@media (max-width: 320px) {
-    #ascii-mountains pre {
-        font-size: 8px;
-    }
-}
-
-@media (max-width: 280px) {
-    #ascii-mountains pre {
-        font-size: 6px;
-    }
-}
-
+/* Responsive images */
 @media (max-width: 768px) {
-    img {
-        max-width: 90%;
-    }
-}
-
-@media (max-width: 480px) {
-    img {
+    img, .profile-img {
         max-width: 100%;
+        height: auto;
+    }
+
+    .profile-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .profile-img {
+        margin-right: 0;
+        margin-bottom: 20px;
+        width: 150px; /* Smaller profile image on mobile */
     }
 }
 
-@media (max-width: 600px) {
-  .profile-container {
-    flex-direction: column;
-  }
-  
-  .profile-img {
-    margin-right: 0;
-    margin-bottom: 20px;
-  }
+/* Adjustments for very small screens */
+@media (max-width: 320px) {
+    body, html {
+        font-size: 14px; /* Slightly smaller base font size for very small screens */
+    }
+
+    .container {
+        padding: 5px;
+    }
+
+    #main-content {
+        padding: 10px;
+    }
 }
 
+/* Ensure buttons and links are easily tappable on mobile */
+@media (max-width: 768px) {
+    a, button, .submit-btn {
+        min-height: 44px; /* Minimum touch target size */
+        line-height: 44px;
+        padding: 0 16px;
+    }
+}
 
+/* Adjust ASCII art for better mobile display */
+@media (max-width: 768px) {
+    #ascii-mountains {
+        margin-bottom: -20px; /* Adjust overlap with name */
+    }
+
+    #ascii-mountains pre {
+        font-size: 10px; /* Smaller font size for ASCII art on mobile */
+    }
+}
+
+/* Improve readability of code blocks on mobile */
+@media (max-width: 768px) {
+    .blog-post .post-content pre {
+        padding: 10px;
+        font-size: 12px;
+        white-space: pre-wrap;
+        word-wrap: break-word;
+    }
+}
