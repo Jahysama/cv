@@ -1,4 +1,5 @@
 import os
+import yaml
 import glob
 from PIL import Image, ImageDraw, ImageFont
 import textwrap
@@ -64,19 +65,36 @@ def generate_og_image(title, description, output_path):
     image.save(output_path)
 
 
+def parse_frontmatter(content):
+    # Split the content into frontmatter and body
+    _, frontmatter, _ = content.split("---", 2)
+    # Parse the frontmatter as YAML
+    metadata = yaml.safe_load(frontmatter)
+    return metadata
+
+
 def main():
     # Generate images for all blog posts
     blog_posts = glob.glob("blog_posts/*.md")
     for post in blog_posts:
         with open(post, "r") as f:
             content = f.read()
-            # Extract title and description (you may need to adjust this based on your markdown structure)
-            title = content.split("\n")[0].replace("# ", "")
-            description = content.split("\n")[
-                2
-            ]  # Assuming the description is the third line
-            slug = os.path.basename(post).replace(".md", "")
+            # Parse frontmatter to extract metadata
+            metadata = parse_frontmatter(content)
+
+            # Extract title, description (excerpt), and slug from metadata
+            title = metadata.get("title", "")
+            description = metadata.get("excerpt", "")
+            slug = metadata.get("slug", "")
+
+            # If slug is not provided, use the filename without extension as a fallback
+            if not slug:
+                slug = os.path.basename(post).replace(".md", "")
+
             generate_og_image(title, description, f"assets/opengraph/images/{slug}.png")
+            print(
+                f'Generated image with title: "{title}" and description "{description}" for slug: {slug}'
+            )
 
     print(
         f"Generated {len(blog_posts)} OG images in Catppuccin Mocha style with favicon."

@@ -45,22 +45,6 @@ async def serve_page(request: Request):
                 main_content.clear()
                 main_content.append(BeautifulSoup(content, "html.parser"))
 
-            script = """
-            <script>
-                document.body.addEventListener('htmx:afterOnLoad', function(event) {
-                    var path = event.detail.pathInfo.requestPath;
-                    window.history.pushState({}, "", window.location.origin + path);
-                    document.title = path.substring(1).charAt(0).toUpperCase() + path.substring(2) || 'Home';
-                });
-
-                window.onpopstate = function(event) {
-                    var path = window.location.pathname;
-                    htmx.ajax('GET', path, '#main-content');
-                };
-            </script>
-            """
-            soup.body.append(BeautifulSoup(script, "html.parser"))
-
             return HTMLResponse(content=str(soup))
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Internal Server Error: {str(e)}")
