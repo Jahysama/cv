@@ -9,6 +9,8 @@ excerpt: "This is my experience building a website with Claude AI"
 
 # Creating My Personal Website with Claude AI: A Journey of Discovery
 
+*[View the website code on GitHub](https://github.com/Jahysama/cv)*
+
 ## Introduction
 
 One day, I decided to completely recreate my personal website. The previous version was built with Next.js, but as someone who's not a frontend developer, I found myself out of my depth. I had simply forked another developer's code and made minor personalizations. This time, I wanted a stack I could understand and maintain, so I opted for HTMX and FastAPI.
