@@ -38,6 +38,11 @@ resource "google_compute_instance" "website_instance" {
   tags = ["http-server", "https-server"]
 }
 
+# Create a static IP address
+resource "google_compute_address" "static_ip" {
+  name = local.static_ip_name
+}
+
 # Allow HTTP traffic
 resource "google_compute_firewall" "allow_http" {
   name    = "${local.firewall_rule_name}-http"
