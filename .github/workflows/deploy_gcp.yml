@@ -42,21 +42,8 @@ jobs:
             ${{ secrets.DOCKERHUB_USERNAME }}/website:${{ github.sha }}
             ${{ secrets.DOCKERHUB_USERNAME }}/website:latest
 
-      # Check if the instance group exists
-      - name: Check if instance group exists
-        id: check_instance_group
-        run: |
-          if gcloud compute instance-groups managed describe website-instance-group --zone=$GCP_ZONE &> /dev/null; then
-            echo "Instance group exists"
-            echo "exists=true" >> $GITHUB_OUTPUT
-          else
-            echo "Instance group does not exist"
-            echo "exists=false" >> $GITHUB_OUTPUT
-          fi
-
       # Update the container in the instance group if it exists
       - name: Update container in instance group
-        if: steps.check_instance_group.outputs.exists == 'true'
         run: |
           gcloud compute instance-groups managed rolling-action replace website-instance-group \
             --zone=$GCP_ZONE \
@@ -71,28 +58,3 @@ jobs:
           gcloud compute instance-groups managed wait-until-stable website-instance-group \
             --zone=$GCP_ZONE \
             --timeout=600s
-
-      # Invalidate the load balancer cache if it exists
-      - name: Check if load balancer exists
-        id: check_load_balancer
-        run: |
-          if gcloud compute url-maps describe website-url-map &> /dev/null; then
-            echo "Load balancer exists"
-            echo "exists=true" >> $GITHUB_OUTPUT
-          else
-            echo "Load balancer does not exist"
-            echo "exists=false" >> $GITHUB_OUTPUT
-          fi
-
-      - name: Invalidate load balancer cache
-        if: steps.check_load_balancer.outputs.exists == 'true'
-        run: |
-          gcloud compute url-maps invalidate-cdn-cache website-url-map \
-            --path="/*"
-
-      # Print a message if the instance group doesn't exist
-      - name: Print message if instance group doesn't exist
-        if: steps.check_instance_group.outputs.exists == 'false'
-        run: |
-          echo "The instance group 'website-instance-group' does not exist in the project and zone."
-          echo "Please ensure that your infrastructure is properly set up before running this deployment."
