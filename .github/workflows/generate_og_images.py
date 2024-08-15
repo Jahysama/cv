@@ -76,7 +76,7 @@ def main():
                 2
             ]  # Assuming the description is the third line
             slug = os.path.basename(post).replace(".md", "")
-            generate_og_image(title, description, f"static/og_images/{slug}.png")
+            generate_og_image(title, description, f"assets/opengraph/images/{slug}.png")
 
     print(
         f"Generated {len(blog_posts)} OG images in Catppuccin Mocha style with favicon."
