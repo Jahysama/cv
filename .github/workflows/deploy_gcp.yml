@@ -7,8 +7,8 @@ on:
 env:
   DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
   GCP_PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
-  GCP_REGION: europe-west4
   GCP_ZONE: europe-west4-a
+  INSTANCE_NAME: website-instance # Replace with your actual instance name
 
 jobs:
   build-publish-deploy:
@@ -42,19 +42,23 @@ jobs:
             ${{ secrets.DOCKERHUB_USERNAME }}/website:${{ github.sha }}
             ${{ secrets.DOCKERHUB_USERNAME }}/website:latest
 
-      # Update the container in the instance group if it exists
-      - name: Update container in instance group
+      - name: Update container on the instance
         run: |
-          gcloud compute instance-groups managed rolling-action replace website-instance-group \
-            --zone=$GCP_ZONE \
-            --max-unavailable=0 \
-            --max-surge=1 \
-            --replacement-method=substitute
+          echo "Updating container for instance: ${{ env.INSTANCE_NAME }}"
 
-      # Wait for the update to complete if the instance group exists
-      - name: Wait for update to complete
-        if: steps.check_instance_group.outputs.exists == 'true'
+          gcloud compute instances update-container ${{ env.INSTANCE_NAME }} \
+            --zone=${{ env.GCP_ZONE }} \
+            --container-image=${{ secrets.DOCKERHUB_USERNAME }}/website:${{ github.sha }}
+
+          echo "Container updated for instance ${{ env.INSTANCE_NAME }}"
+
+      - name: Verify container update
         run: |
-          gcloud compute instance-groups managed wait-until-stable website-instance-group \
-            --zone=$GCP_ZONE \
-            --timeout=600s
+          echo "Verifying container for instance: ${{ env.INSTANCE_NAME }}"
+          CONTAINER_IMAGE=$(gcloud compute instances describe ${{ env.INSTANCE_NAME }} --zone=${{ env.GCP_ZONE }} --format="value(metadata.items.where(key='gce-container-declaration').value.spec.containers[0].image)")
+          if [[ "$CONTAINER_IMAGE" != "${{ secrets.DOCKERHUB_USERNAME }}/website:${{ github.sha }}" ]]; then
+            echo "Container image for ${{ env.INSTANCE_NAME }} is not updated. Current image: $CONTAINER_IMAGE"
+            exit 1
+          fi
+          echo "Container verified for instance ${{ env.INSTANCE_NAME }}"
+          echo "Update completed successfully"
