@@ -181,32 +181,29 @@ color: var(--lavender);
 }
 
 .mountains-and-name {
-    display: inline-block; /* To keep the block centered */
-    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    overflow: hidden;
 }
 
 #ascii-mountains {
-    margin-bottom: -40px; /* Negative margin to pull the name up */
-    overflow: hidden;
-    position: relative;
-    width: 100%;
+    max-width: 100%;
+    overflow-x: auto;
+    white-space: nowrap;
+    margin-bottom: -20px; /* Adjust as needed for overlap with name */
+    text-align: center;
 }
 
 #ascii-mountains pre {
-    font-family: monospace;
+    display: inline-block;
+    text-align: center;
     font-size: 14px;
     line-height: 1;
     color: var(--lavender);
-    text-align: center;
     margin: 0;
     padding: 0;
-    white-space: pre;
-    word-wrap: normal;
-    overflow-wrap: normal;
-}
-
-#ascii-mountains pre::selection {
-    background-color: transparent;
 }
 
 .social-links {
