@@ -2,12 +2,12 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <rss version="2.0">
 <channel>
-    <title>Your Blog Title</title>
-    <link>http://yourdomain.com/blog</link>
-    <description>Your blog description here</description>
+    <title>Egor Kosaretsky's personal blog</title>
+    <link>http://kosaretsky.co.uk/blog</link>
+    <description>Egor Kosaretsky's personal blog</description>
     <language>en-us</language>
-    <pubDate>Mon, 06 Sep 2021 00:00:00 GMT</pubDate>
-    <lastBuildDate>Mon, 06 Sep 2021 00:00:00 GMT</lastBuildDate>
+    <pubDate>Mon, 15 Aug 2024 00:00:00 GMT</pubDate>
+    <lastBuildDate>Mon, 15 Aug 2024 00:00:00 GMT</lastBuildDate>
     
     <!-- Blog posts will be dynamically inserted here -->
     
