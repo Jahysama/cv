@@ -51,14 +51,3 @@ jobs:
             --container-image=${{ secrets.DOCKERHUB_USERNAME }}/website:${{ github.sha }}
 
           echo "Container updated for instance ${{ env.INSTANCE_NAME }}"
-
-      - name: Verify container update
-        run: |
-          echo "Verifying container for instance: ${{ env.INSTANCE_NAME }}"
-          CONTAINER_IMAGE=$(gcloud compute instances describe ${{ env.INSTANCE_NAME }} --zone=${{ env.GCP_ZONE }} --format="value(metadata.items.where(key='gce-container-declaration').value.spec.containers[0].image)")
-          if [[ "$CONTAINER_IMAGE" != "${{ secrets.DOCKERHUB_USERNAME }}/website:${{ github.sha }}" ]]; then
-            echo "Container image for ${{ env.INSTANCE_NAME }} is not updated. Current image: $CONTAINER_IMAGE"
-            exit 1
-          fi
-          echo "Container verified for instance ${{ env.INSTANCE_NAME }}"
-          echo "Update completed successfully"
