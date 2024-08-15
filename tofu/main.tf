@@ -27,6 +27,9 @@ resource "google_compute_instance" "website_instance" {
   network_interface {
     network = "default"
 
+    access_config {
+      nat_ip = google_compute_address.static_ip.address
+    }
   }
 
   metadata = {
@@ -36,6 +39,11 @@ resource "google_compute_instance" "website_instance" {
   }
 
   tags = ["http-server", "https-server"]
+}
+
+# Create a static IP address
+resource "google_compute_address" "static_ip" {
+  name = local.static_ip_name
 }
 
 # Allow HTTP traffic
