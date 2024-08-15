@@ -152,3 +152,29 @@ body, html {
         word-wrap: break-word;
     }
 }
+
+@media (max-width: 768px) {
+    #main-content .blog-post {
+        padding: 15px;
+    }
+
+    #main-content .blog-post .post-header {
+        padding-top: 30px; /* Slightly less space on mobile */
+    }
+
+    #main-content .blog-post .copy-link-btn {
+        font-size: 12px;
+        padding: 4px 8px;
+    }
+
+    #main-content .blog-post h1 {
+        font-size: 1.5em; /* Smaller heading on mobile */
+    }
+}
+@media (max-width: 768px) {
+    #main-content .blog-post .copy-link-btn {
+        min-height: 44px;
+        line-height: 44px;
+        padding: 0 12px;
+    }
+}

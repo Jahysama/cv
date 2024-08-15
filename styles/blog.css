@@ -48,12 +48,13 @@
 
 #main-content .blog-post .post-header {
     position: relative;
+    padding-top: 40px; /* Add space for the button */
     margin-bottom: 20px;
 }
 
 #main-content .blog-post .copy-link-btn {
     position: absolute;
-    top: -30px;
+    top: 0;
     right: 0;
     background-color: var(--green);
     color: var(--base);
@@ -77,7 +78,7 @@
 
 #main-content .blog-post h1 {
     color: var(--blue);
-    margin-bottom: 10px;
+    margin-top: 0;
 }
 
 #main-content .blog-post .post-date {

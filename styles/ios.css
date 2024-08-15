@@ -1,0 +1,81 @@
+/* iOS Compatibility Fixes */
+
+/* Prevent automatic font size adjustment */
+html {
+    -webkit-text-size-adjust: 100%;
+}
+
+/* Fix for iOS momentum scrolling */
+body {
+    -webkit-overflow-scrolling: touch;
+}
+
+/* Improve touch event handling */
+a, button, input, select, textarea {
+    -webkit-tap-highlight-color: transparent;
+}
+
+/* Fix for position: fixed elements on iOS */
+.fixed-element {
+    position: fixed;
+    -webkit-transform: translateZ(0);
+}
+
+/* Prevent zooming on form inputs */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+textarea {
+    font-size: 16px;
+}
+
+/* Fix for flexbox issues on older iOS versions */
+.flex-container {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+}
+
+/* Ensure proper rendering of transformed elements */
+.transformed-element {
+    -webkit-transform: translateZ(0);
+    -webkit-backface-visibility: hidden;
+}
+
+/* Fix for scroll anchoring issues */
+body {
+    overflow-anchor: none;
+}
+
+/* Improve performance for fixed backgrounds on iOS */
+.fixed-background {
+    background-attachment: scroll;
+}
+
+/* Ensure smooth scrolling behavior */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Fix for VoiceOver accessibility */
+[role="button"],
+button {
+    cursor: pointer;
+}
+
+/* iOS-specific media query */
+@supports (-webkit-touch-callout: none) {
+    /* iOS-only styles */
+    .ios-specific-fix {
+        /* Add any iOS-specific adjustments here */
+    }
+}
+
+
+/* Adjust viewport height for iOS */
+@supports (-webkit-touch-callout: none) {
+    .full-height {
+        height: -webkit-fill-available;
+    }
+}
+
