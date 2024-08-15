@@ -1,8 +1,18 @@
 /* iOS Compatibility Fixes */
+:root {
+    --example-size: 100px;
+}
+
+
+.calculated-element {
+    width: calc(2 * var(--example-size));
+}
+
 
 /* Prevent automatic font size adjustment */
 html {
     -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
 }
 
 /* Fix for iOS momentum scrolling */
@@ -15,10 +25,28 @@ a, button, input, select, textarea {
     -webkit-tap-highlight-color: transparent;
 }
 
+input,
+textarea,
+select {
+    -webkit-appearance: none;
+    appearance: none;
+    border-radius: 0;
+}
+
+input,
+textarea,
+select {
+    -webkit-appearance: none;
+    appearance: none;
+    border-radius: 0;
+}
+
 /* Fix for position: fixed elements on iOS */
-.fixed-element {
+.fixed-element,
+.sticky-element {
     position: fixed;
     -webkit-transform: translateZ(0);
+    transform: translateZ(0);
 }
 
 /* Prevent zooming on form inputs */
@@ -30,6 +58,10 @@ textarea {
 }
 
 /* Fix for flexbox issues on older iOS versions */
+.flex-item {
+    -webkit-flex-basis: auto;
+    flex-basis: auto;
+}
 .flex-container {
     display: -webkit-box;
     display: -webkit-flex;
@@ -57,25 +89,34 @@ html {
     scroll-behavior: smooth;
 }
 
-/* Fix for VoiceOver accessibility */
-[role="button"],
-button {
-    cursor: pointer;
-}
-
-/* iOS-specific media query */
 @supports (-webkit-touch-callout: none) {
-    /* iOS-only styles */
-    .ios-specific-fix {
-        /* Add any iOS-specific adjustments here */
+    :root {
+        --vh: calc(var(--vh, 1vh));
     }
-}
 
-
-/* Adjust viewport height for iOS */
-@supports (-webkit-touch-callout: none) {
     .full-height {
-        height: -webkit-fill-available;
+        height: calc(100 * var(--vh));
     }
 }
 
+@supports (-webkit-touch-callout: none) {
+    .grid-container {
+        display: -webkit-grid;
+        display: grid;
+    }
+}
+
+@supports (-webkit-sticky: sticky) or (position: -webkit-sticky) {
+    .sticky-element {
+        position: -webkit-sticky;
+        position: sticky;
+        top: 0;
+    }
+}
+
+@supports (-webkit-backdrop-filter: none) or (backdrop-filter: none) {
+    .blur-background {
+        -webkit-backdrop-filter: blur(10px);
+        backdrop-filter: blur(10px);
+    }
+}
