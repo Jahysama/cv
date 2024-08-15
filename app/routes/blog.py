@@ -61,6 +61,20 @@ async def serve_blog_post(request: Request, slug: str):
             with open("index.html", "r") as file:
                 template = file.read()
             soup = BeautifulSoup(template, "html.parser")
+
+            # Update OG meta tags
+            soup.find("meta", property="og:title")["content"] = post["title"]
+            soup.find("meta", property="og:description")["content"] = post.get(
+                "excerpt", ""
+            )
+            soup.find("meta", property="og:image")["content"] = (
+                f"https://kosaretsky.co.uk/assets/opengraph/images/{slug}.png"
+            )
+            soup.find("meta", property="og:url")["content"] = (
+                f"https://kosaretsky.co.uk/blog/{slug}"
+            )
+            soup.find("meta", property="og:type")["content"] = "article"
+
             main_content = soup.find(id="main-content")
             if main_content:
                 main_content.clear()
