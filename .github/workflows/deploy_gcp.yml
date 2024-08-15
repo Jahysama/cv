@@ -27,7 +27,7 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install Pillow cairosvg
+          pip install Pillow cairosvg PyYAML
 
       - name: Generate OG images
         run: python .github/workflows/generate_og_images.py
