@@ -7,128 +7,77 @@ slug: "my-website"
 excerpt: "This is my experience building a website with Claude AI"
 ---
 
-# Building My Personal Website with Claude AI, FastAPI, and HTMX
+# Creating My Personal Website with Claude AI: A Journey of Discovery
 
-As a developer, having a personal website is a great way to showcase your skills and share your thoughts with the world. In this post, I'll walk you through how I built my personal website using Claude AI for guidance, FastAPI as the backend framework, and HTMX for dynamic frontend interactions.
+## Introduction
 
-## The Stack
+One day, I decided to completely recreate my personal website. The previous version was built with Next.js, but as someone who's not a frontend developer, I found myself out of my depth. I had simply forked another developer's code and made minor personalizations. This time, I wanted a stack I could understand and maintain, so I opted for HTMX and FastAPI.
 
-- **Backend**: FastAPI
-- **Frontend**: HTML, CSS, and HTMX
-- **AI Assistant**: Claude AI
+## The Early Stages
 
-## Getting Started
+Initially, everything was simple and "macaroni coded":
 
-The first step was to plan out the structure of my website. I wanted a clean, minimalist design with a touch of personality. The main components I decided on were:
+- The entire backend resided in a single file
+- CSS was minimal
+- HTML was split into pages
 
-1. Home page
-2. About page
-3. Projects page
-4. Contact page
-5. Blog
+Claude AI understood the context well at this stage, but challenges arose as the project grew.
 
-## Setting Up the Backend
+## Challenges with Claude AI
 
-I chose FastAPI for the backend because of its speed, simplicity, and built-in support for asynchronous programming. Here's a look at my `main.py` file:
+As the project expanded, several issues emerged:
 
-```python
-from fastapi import FastAPI
-from fastapi.staticfiles import StaticFiles
-from app.routes import blog, pages, search
-from app.config import setup_logging
+1. **Code Duplication**: Claude AI often produced redundant code.
+2. **Debugging Difficulties**: As the codebase grew, identifying and fixing bugs became more challenging.
+3. **Context Limitations**: Feeding the entire codebase to Claude AI became inefficient.
 
-app = FastAPI()
+## Refining the Approach
 
-# Set up logging
-setup_logging()
+To overcome these challenges, I adopted a new strategy:
 
-# Include routers
-app.include_router(blog.router)
-app.include_router(pages.router)
-app.include_router(search.router)
+1. **Focused Problem-Solving**: I began feeding Claude AI only the problematic areas of the code.
+2. **Providing Context**: Instead of sharing the entire codebase, I explained the context myself.
+3. **Directing the AI**: I had to maintain a big-picture view and guide Claude AI to:
+   - Split files appropriately
+   - Refine global logic
+   - Adhere to the chosen technology stack
 
-# Serve static files
-app.mount("/", StaticFiles(directory="."), name="static")
+This approach helped prevent ending up with a single-file "spaghetti code" mess.
 
-if __name__ == "__main__":
-    import uvicorn
+## Tackling Specific Areas
 
-    uvicorn.run(app, host="localhost", port=80)
-```
+### Cloud Infrastructure and CI/CD
 
-This setup allows me to organize my routes into separate modules (`blog`, `pages`, and `search`), making the codebase more maintainable as it grows.
+One of the most challenging aspects was setting up CI/CD with cloud services:
 
-## Designing the Frontend
+- Claude AI struggled with debugging and guiding me through cloud setup.
+- However, it successfully generated working OpenTofu IaC files for my Google Cloud Platform setup.
 
-For the frontend, I went with a minimalist design using HTML and CSS. I used HTMX to add dynamic interactions without the need for complex JavaScript. Here's a snippet from my `index.html`:
+### Frontend Design
 
-```html
-<div>
-    <div id="ascii-mountains">
-        <!-- ASCII art mountains -->
-    </div>
-    <h1>Egor Kosaretsky</h1>
-</div>
+Claude AI excelled in frontend tasks:
 
-<nav>
-    <a href="/">Home</a>
-    <a href="/about">About</a>
-    <a href="/projects">Projects</a>
-    <a href="/contact">Contact</a>
-    <a href="/blog">Blog</a>
-</nav>
+1. **CSS Configuration**: It consistently produced near-perfect results based on my descriptions of desired layouts and styles.
+2. **Icons and ASCII Art**: After multiple attempts and specific directions, Claude AI managed to create satisfactory, if not perfect, designs.
 
-<div class="social-links">
-    <!-- Social media links -->
-</div>
-```
+### Backend Development
 
-I also added a fun ASCII art of mountains to give the site some personality.
+Backend work proved more challenging:
 
-## Styling with CSS
-
-To keep my CSS organized, I split it into multiple files and imported them into a main CSS file:
-
-```css
-@import url('base.css');
-@import url('layout.css');
-@import url('components.css');
-@import url('terminal.css');
-@import url('blog.css');
-@import url('responsive.css');
-```
-
-This approach allows me to easily manage different aspects of my site's styling.
-
-## Adding Interactivity with HTMX
-
-HTMX allowed me to add dynamic content loading without writing complex JavaScript. For example, I used it to implement a live search feature and to load blog posts dynamically.
-
-## Leveraging Claude AI
-
-Throughout the development process, I used Claude AI to help with various aspects:
-
-1. **Code Generation**: Claude helped me write boilerplate code and suggest improvements.
-2. **Problem Solving**: When I encountered bugs or needed to implement a tricky feature, Claude provided guidance and solutions.
-3. **Design Ideas**: Claude offered suggestions for layout and design elements, like the ASCII art mountains.
-4. **Content Creation**: Claude assisted in writing copy for the website and even helped draft this blog post!
-
-## Challenges and Learnings
-
-Building this website wasn't without its challenges. Some of the key learnings were:
-
-1. **FastAPI Configuration**: Setting up FastAPI to serve static files alongside dynamic routes took some trial and error.
-2. **HTMX Integration**: Learning how to effectively use HTMX for dynamic content loading was a new experience, but it paid off in simplified frontend code.
-3. **Responsive Design**: Ensuring the site looked good on all device sizes required careful CSS planning.
+- Claude AI took longer to understand and implement backend logic.
+- Bug occurrences were frequent.
+- Error resolution was aided by sharing terminal outputs, which Claude AI could usually interpret correctly.
 
 ## Conclusion
 
-Building my personal website with the help of Claude AI, FastAPI, and HTMX was an exciting and educational experience. The combination of a powerful AI assistant, a fast and intuitive backend framework, and a simple yet effective frontend technology stack allowed me to create a website that's both functional and reflective of my personality as a developer.
+Using Claude AI significantly accelerated my website development process. However, it's important to note:
 
-I'm looking forward to continually improving and expanding my site. If you're thinking about building your own personal website, I highly recommend giving this stack a try!
+1. The AI performed better with frontend tasks compared to backend development.
+2. Human oversight and direction were crucial throughout the process.
+3. Post-development code refinement was necessary to ensure optimal performance and maintainability.
 
----
+In summary, while Claude AI proved to be a valuable tool in expediting development, it's essential to approach AI-assisted coding with a critical eye and be prepared to refine the output.
 
-Feel free to check out my website at [Your Website URL] and the source code at [Your GitHub Repository URL].
+## A Meta Moment: Refining This Blog Post with Claude AI
 
-Happy coding!
+Interestingly, the process of creating this blog post mirrors the website development experience I've just described. I initially wrote a rough draft of my thoughts and experiences, then turned to Claude AI for assistance in refining and structuring the content.
