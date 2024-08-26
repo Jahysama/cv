@@ -8,7 +8,7 @@ env:
   DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
   GCP_PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
   GCP_ZONE: europe-west4-a
-  INSTANCE_NAME: website-instance # Replace with your actual instance name
+  INSTANCE_NAME: website-instance
 
 jobs:
   build-publish-deploy:
