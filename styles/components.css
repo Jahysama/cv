@@ -162,12 +162,14 @@ nav a {
     padding: 0;
     font-size: inherit;
     text-decoration: underline;
+    transition: color 0.2s ease; /* Smooth color transition */
 }
 
 .text-link:hover {
     color: var(--teal);
     transform: none;
     box-shadow: none;
+    text-decoration: underline; /* Ensure underline stays during hover */
 }
 
 #crow {
