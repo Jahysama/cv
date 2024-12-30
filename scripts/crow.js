@@ -3,9 +3,7 @@ function isMobileDevice() {
 }
 
 if (!isMobileDevice()) {
-
   const crowFrames = [
-
     `
       ___     
      (o,o)    
@@ -107,14 +105,31 @@ if (!isMobileDevice()) {
     `
   ];
 
+  function getTombstoneArt(deathDate) {
+    return `
+     .-.
+    (RIP)
+    |===|
+    |${deathDate.padEnd(4)}|
+    |===|
+    |===|
+    ^^^^^
+    `;
+  }
+
   let currentFrame = 0;
-  let isAlive = true;
+  let isAlive = !localStorage.getItem('crowIsDead');
   let animationInterval;
   const crowElement = document.getElementById('crow');
 
   function animateCrow() {
     crowElement.textContent = crowFrames[currentFrame];
     currentFrame = (currentFrame + 1) % crowFrames.length;
+  }
+
+  function showTombstone() {
+    const deathDate = localStorage.getItem('crowDeathDate') || 'Unknown';
+    crowElement.textContent = getTombstoneArt(deathDate);
   }
 
   function animateDeath() {
@@ -127,6 +142,7 @@ if (!isMobileDevice()) {
         deathFrame++;
       } else {
         clearInterval(deathInterval);
+        showTombstone();
       }
     }, 200);
   }
@@ -134,11 +150,23 @@ if (!isMobileDevice()) {
   crowElement.addEventListener('click', () => {
     if (isAlive) {
       isAlive = false;
+      const deathDate = new Date().toLocaleDateString('en-US', { 
+        month: 'short', 
+        day: 'numeric',
+        year: 'numeric'
+      });
+      localStorage.setItem('crowIsDead', 'true');
+      localStorage.setItem('crowDeathDate', deathDate);
       animateDeath();
     }
   });
 
-  animationInterval = setInterval(animateCrow, 200);
+  // Initial state
+  if (isAlive) {
+    animationInterval = setInterval(animateCrow, 200);
+  } else {
+    showTombstone();
+  }
 
 } else {
   // For mobile devices, remove the crow element entirely
