@@ -20,9 +20,7 @@ jobs:
 
       - name: Setup OpenTofu
         uses: opentofu/setup-opentofu@v1
-        with:
-          tofu_version: "1.6.0"
-
+        
       - name: Authenticate to Google Cloud
         uses: "google-github-actions/auth@v1"
         with:
