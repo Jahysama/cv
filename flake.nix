@@ -23,6 +23,10 @@
        inherit inputs pkgs;
        modules = [
          {
+           packages = [
+             pkgs.minetest
+           ];
+
            languages.python = {
              enable = true;
              version = "3.11";

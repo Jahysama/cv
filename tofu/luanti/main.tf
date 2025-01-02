@@ -11,6 +11,14 @@ terraform {
   }
 }
 
+# Create a persistent disk for Luanti data
+resource "google_compute_disk" "luanti_data" {
+  name             = "luanti-data-disk"
+  type             = "pd-balanced"
+  zone             = var.zone
+  size             = 20 # GB
+}
+
 # Create a static IP
 resource "google_compute_address" "luanti_ip" {
   name = "luanti-server-ip"
@@ -23,35 +31,28 @@ resource "google_compute_firewall" "luanti_server" {
 
   allow {
     protocol = "udp"
-    ports    = ["30000"]  # Default Luanti port
+    ports    = ["30000"] # Default Luanti port
   }
 
   allow {
     protocol = "tcp"
-    ports    = ["9100"]  # Prometheus metrics
+    ports    = ["9100"] # Prometheus metrics
   }
 
   source_ranges = ["0.0.0.0/0"]
   target_tags   = ["luanti-server"]
 }
 
-# Create a persistent disk for Luanti data
-resource "google_compute_disk" "luanti_data" {
-  name = "luanti-data-disk"
-  type = "pd-balanced"
-  zone = var.zone
-  size = 20  # GB
-}
-
-resource "google_compute_instance" "minetest_server" {
-  name         = "minetest-server"
+# Create the Compute Engine instance
+resource "google_compute_instance" "luanti_server" {
+  name         = "luanti-server"
   machine_type = var.machine_type
   zone         = var.zone
 
   boot_disk {
     initialize_params {
       image = "cos-cloud/cos-stable"
-      size  = 20  # GB
+      size  = 20 # GB
     }
   }
 
@@ -66,8 +67,8 @@ resource "google_compute_instance" "minetest_server" {
     gce-container-declaration = yamlencode({
       spec = {
         containers = [{
-          image = "warr1024/minetestserver:latest-perf"  # Using performance monitoring enabled version
-          name  = "minetest"
+          image = "warr1024/minetestserver:latest" # Base image since perf tag isn't available
+          name  = "luanti"
           env = [
             {
               name  = "PORT"
@@ -75,7 +76,7 @@ resource "google_compute_instance" "minetest_server" {
             },
             {
               name  = "NAME"
-              value = "Minetest @ ${var.domain_name}"
+              value = "Luanti @ ${var.domain_name}"
             },
             {
               name  = "SERVER_ANNOUNCE"
@@ -87,7 +88,7 @@ resource "google_compute_instance" "minetest_server" {
             },
             {
               name  = "BACKEND"
-              value = "sqlite3"  # Using SQLite for local storage
+              value = "sqlite3" # Using SQLite for local storage
             },
             {
               name  = "PROMETHEUS_LISTEN_ADDR"
@@ -97,28 +98,15 @@ resource "google_compute_instance" "minetest_server" {
           volumeMounts = [
             {
               name      = "luanti-data"
-              mountPath = "/data"  # Main data directory
-            },
-            {
-              name      = "luanti-perf"
-              mountPath = "/perf"  # Performance data directory
+              mountPath = "/data" # Main data directory
             }
           ]
           ports = [
             {
               containerPort = 30000
               hostPort     = 30000
-            },
-            {
-              containerPort = 9100  # Prometheus metrics
-              hostPort     = 9100
             }
           ]
-          securityContext = {
-            capabilities = {
-              add = ["PERFMON"]  # Required for performance monitoring
-            }
-          }
         }]
         volumes = [
           {
@@ -127,27 +115,18 @@ resource "google_compute_instance" "minetest_server" {
               pdName = google_compute_disk.luanti_data.name
               fsType = "ext4"
             }
-          },
-          {
-            name = "luanti-perf"
-            hostPath = {
-              path = "/var/lib/luanti-perf"
-              type = "DirectoryOrCreate"
-            }
           }
         ]
       }
     })
   }
 
-  tags = ["minetest-server"]
-
-  # Ensure the instance can be gracefully stopped
-  deletion_protection = false
-  allow_stopping_for_update = true
+  tags = ["luanti-server"]
 
   service_account {
     scopes = ["cloud-platform"]
   }
-}
 
+  allow_stopping_for_update = true
+  deletion_protection       = false
+}
