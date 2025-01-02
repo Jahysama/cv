@@ -114,6 +114,7 @@ resource "google_compute_instance" "luanti_server" {
             gcePersistentDisk = {
               pdName = "luanti-data-disk"
               fsType = "ext4"
+              readOnly = false
             }
           }
         ]
