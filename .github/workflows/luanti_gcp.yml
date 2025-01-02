@@ -1,4 +1,4 @@
-name: OpenTofu CI
+name: OpenTofu Luanti CI
 
 on:
   push:
@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: ./tofu/web
+        working-directory: ./tofu/luanti
 
     steps:
       - name: Checkout
@@ -33,7 +33,7 @@ jobs:
         run: |
           tofu init \
             -backend-config="bucket=${{ secrets.GCS_BUCKET }}" \
-            -backend-config="prefix=web/terraform/state"
+            -backend-config="prefix=luanti/terraform/state"
 
       - name: OpenTofu Format
         run: tofu fmt -check
