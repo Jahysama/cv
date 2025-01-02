@@ -23,12 +23,12 @@ resource "google_compute_firewall" "luanti_server" {
 
   allow {
     protocol = "udp"
-    ports    = ["30000"] # Default Luanti port
+    ports    = ["30000"]  # Default Luanti port
   }
 
   allow {
     protocol = "tcp"
-    ports    = ["9100"] # Prometheus metrics
+    ports    = ["9100"]  # Prometheus metrics
   }
 
   source_ranges = ["0.0.0.0/0"]
@@ -40,23 +40,20 @@ resource "google_compute_disk" "luanti_data" {
   name = "luanti-data-disk"
   type = "pd-balanced"
   zone = var.zone
-  size = 20 # GB
+  size = 20  # GB
 
   # Enable higher IOPS for better database performance
   provisioned_iops = 1000
 }
-
 resource "google_compute_instance" "minetest_server" {
-  name                      = "minetest-server"
-  machine_type             = var.machine_type
-  zone                     = var.zone
-  allow_stopping_for_update = true
-  deletion_protection      = false
+  name         = "minetest-server"
+  machine_type = var.machine_type
+  zone         = var.zone
 
   boot_disk {
     initialize_params {
       image = "cos-cloud/cos-stable"
-      size  = 20 # GB
+      size  = 20  # GB
     }
   }
 
@@ -71,7 +68,7 @@ resource "google_compute_instance" "minetest_server" {
     gce-container-declaration = yamlencode({
       spec = {
         containers = [{
-          image = "warr1024/minetestserver:latest-perf"
+          image = "warr1024/minetestserver:latest-perf"  # Using performance monitoring enabled version
           name  = "minetest"
           env = [
             {
@@ -92,7 +89,7 @@ resource "google_compute_instance" "minetest_server" {
             },
             {
               name  = "BACKEND"
-              value = "sqlite3"
+              value = "sqlite3"  # Using SQLite for local storage
             },
             {
               name  = "PROMETHEUS_LISTEN_ADDR"
@@ -102,11 +99,11 @@ resource "google_compute_instance" "minetest_server" {
           volumeMounts = [
             {
               name      = "luanti-data"
-              mountPath = "/data"
+              mountPath = "/data"  # Main data directory
             },
             {
               name      = "luanti-perf"
-              mountPath = "/perf"
+              mountPath = "/perf"  # Performance data directory
             }
           ]
           ports = [
@@ -115,13 +112,13 @@ resource "google_compute_instance" "minetest_server" {
               hostPort     = 30000
             },
             {
-              containerPort = 9100
+              containerPort = 9100  # Prometheus metrics
               hostPort     = 9100
             }
           ]
           securityContext = {
             capabilities = {
-              add = ["PERFMON"]
+              add = ["PERFMON"]  # Required for performance monitoring
             }
           }
         }]
@@ -146,6 +143,10 @@ resource "google_compute_instance" "minetest_server" {
   }
 
   tags = ["minetest-server"]
+
+  # Ensure the instance can be gracefully stopped
+  deletion_protection = false
+  allow_stopping_for_update = true
 
   service_account {
     scopes = ["cloud-platform"]
