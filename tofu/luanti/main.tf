@@ -49,6 +49,12 @@ resource "google_compute_instance" "luanti_server" {
   machine_type = var.machine_type
   zone         = var.zone
 
+  attached_disk {
+    source      = google_compute_disk.luanti_data.self_link
+    device_name = "luanti-data-disk"
+    mode        = "READ_WRITE"
+  }
+
   boot_disk {
     initialize_params {
       image = "cos-cloud/cos-stable"
