@@ -24,7 +24,7 @@ variable "tf_state_bucket" {
 variable "machine_type" {
   description = "The machine type for the Compute Engine instance"
   type        = string
-  default     = "e2-medium"  # Recommended for Minetest server
+  default     = "e2-medium"
 }
 
 variable "domain_name" {
@@ -32,3 +32,4 @@ variable "domain_name" {
   type        = string
   default     = "kosaretsky.co.uk"
 }
+
