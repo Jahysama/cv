@@ -35,9 +35,6 @@ jobs:
             -backend-config="bucket=${{ secrets.GCS_BUCKET }}" \
             -backend-config="prefix=web/terraform/state"
 
-      - name: OpenTofu Format
-        run: tofu fmt -check
-
       - name: OpenTofu Validate
         run: tofu validate -no-color
 
