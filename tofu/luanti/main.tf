@@ -41,10 +41,8 @@ resource "google_compute_disk" "luanti_data" {
   type = "pd-balanced"
   zone = var.zone
   size = 20  # GB
-
-  # Enable higher IOPS for better database performance
-  provisioned_iops = 1000
 }
+
 resource "google_compute_instance" "minetest_server" {
   name         = "minetest-server"
   machine_type = var.machine_type
