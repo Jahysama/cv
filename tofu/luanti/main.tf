@@ -60,7 +60,7 @@ resource "google_compute_instance" "minetest_server" {
   network_interface {
     network = "default"
     access_config {
-      nat_ip = google_compute_address.minetest_ip.address
+      nat_ip = google_compute_address.luanti_ip.address
     }
   }
 
