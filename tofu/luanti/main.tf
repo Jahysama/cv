@@ -48,7 +48,7 @@ resource "local_file" "minetest_conf" {
   content  = <<-EOT
     server_name = ${var.domain_name}
     server_description = Super cool Egor's server
-    server_address = ${var.domain_name}
+    server_address = ${google_compute_address.luanti_ip.address}
     port = 30000
     
     # Game settings
