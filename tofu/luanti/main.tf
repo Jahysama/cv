@@ -104,7 +104,7 @@ resource "google_compute_instance" "luanti_server" {
 
   boot_disk {
     initialize_params {
-      image = "cos-cloud/cos-stable"
+      image = "ubuntu-os-cloud/ubuntu-2204-lts"
       size  = 20 # GB
     }
   }
@@ -122,9 +122,6 @@ resource "google_compute_instance" "luanti_server" {
         containers = [{
           image = "warr1024/minetestserver:latest" # Base image since perf tag isn't available
           name  = "luanti"
-          securityContext = {
-            runAsUser = 0  # Run as root to ensure write permissions
-          }
           env = [
             {
               name  = "PORT"
