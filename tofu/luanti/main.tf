@@ -48,7 +48,7 @@ resource "local_file" "minetest_conf" {
   content  = <<-EOT
     server_name = ${var.domain_name}
     server_description = Super cool Egor's server
-    server_address = ${google_compute_address.luanti_ip.address}
+    server_address = ${var.domain_name}
     port = 30000
     
     # Game settings
@@ -104,7 +104,7 @@ resource "google_compute_instance" "luanti_server" {
 
   boot_disk {
     initialize_params {
-      image = "ubuntu-os-cloud/ubuntu-2204-lts"
+      image = "cos-cloud/cos-stable"
       size  = 20 # GB
     }
   }
