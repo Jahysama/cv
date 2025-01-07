@@ -81,7 +81,7 @@ resource "google_compute_instance" "luanti_server" {
         entrypoint = [
           "/bin/sh",
           "-c",
-          "wget -O /home/app/.minetest/minetest.conf https://raw.githubusercontent.com/Jahysama/cv/main/tofu/luanti/minetest.conf && mkdir -p /home/app/.minetest/games && wget -O /home/app/.minetest/games/game.zip https://content.luanti.org/uploads/bf06e78d80.zip && unzip /home/app/.minetest/games/game.zip -d /home/app/.minetest/games/ && rm /home/app/.minetest/games/game.zip && /etc/entry.sh --config /home/app/.minetest/minetest.conf"
+          "wget -O /home/app/.minetest/minetest.conf https://raw.githubusercontent.com/Jahysama/cv/main/tofu/luanti/minetest.conf && /etc/entry.sh --gameid mineclone2 --config /home/app/.minetest/minetest.conf"
         ]
           volumeMounts = [
             {
