@@ -48,7 +48,6 @@ resource "google_compute_instance" "luanti_server" {
   name         = "luanti-server"
   machine_type = var.machine_type
   zone         = var.zone
-  instance_id = timestamp()
 
   attached_disk {
     source      = google_compute_disk.luanti_data.self_link
@@ -79,32 +78,6 @@ resource "google_compute_instance" "luanti_server" {
           securityContext = {
           privileged = true  # Add this to ensure proper permissions
         }
-          env = [
-            {
-              name  = "PORT"
-              value = "30000"
-            },
-            {
-              name  = "NAME"
-              value = "Luanti @ ${var.domain_name}"
-            },
-            {
-              name  = "SERVER_ANNOUNCE"
-              value = "true"
-            },
-            {
-              name  = "ENABLE_ROLLBACK"
-              value = "true"
-            },
-            {
-              name  = "BACKEND"
-              value = "sqlite3" # Using SQLite for local storage
-            },
-            {
-              name  = "PROMETHEUS_LISTEN_ADDR"
-              value = "0.0.0.0:9100"
-            }
-          ]
           volumeMounts = [
             {
               name      = "luanti-data"
