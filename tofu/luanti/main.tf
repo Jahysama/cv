@@ -142,19 +142,6 @@ resource "google_compute_http_health_check" "luanti" {
   timeout_sec        = 5
 }
 
-resource "google_compute_backend_service" "luanti" {
-  name        = "luanti-backend"
-  protocol    = "UDP"
-  timeout_sec = 30
-  port_name   = "game"
-
-  health_checks = [google_compute_health_check.luanti.id]
-
-  backend {
-    group = google_compute_instance_group.luanti.id
-  }
-}
-
 resource "google_compute_target_pool" "luanti" {
   name = "luanti-target-pool"
   
