@@ -122,6 +122,9 @@ resource "google_compute_instance" "luanti_server" {
         containers = [{
           image = "warr1024/minetestserver:latest" # Base image since perf tag isn't available
           name  = "luanti"
+          securityContext = {
+          privileged = true  # Add this to ensure proper permissions
+        }
           env = [
             {
               name  = "PORT"
