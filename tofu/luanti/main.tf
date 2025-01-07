@@ -43,53 +43,6 @@ resource "google_compute_firewall" "luanti_server" {
   target_tags   = ["luanti-server"]
 }
 
-resource "local_file" "minetest_conf" {
-  filename = "minetest.conf"
-  content  = <<-EOT
-    server_name = ${var.domain_name}
-    server_description = Super cool Egor's server
-    server_address = ${var.domain_name}
-    port = 30000
-    
-    # Game settings
-    default_game = mineclone2
-    creative_mode = false
-    enable_damage = true
-    
-    # Server list settings
-    server_announce = true
-    serverlist_url = servers.minetest.net
-    
-    # Security settings
-    enable_rollback_recording = true
-    disallow_empty_passwords = true
-    disable_anticheat = false
-    default_privs = interact, shout
-    
-    # Performance settings
-    max_users = 15
-    max_simultaneous_block_sends_per_client = 10
-    max_packets_per_iteration = 1024
-    time_speed = 72
-    max_block_send_distance = 12
-    active_block_range = 4
-    server_map_save_interval = 15.3
-    
-    # Database settings
-    enable_sqlite3 = true
-    sqlite_synchronous = 0
-    sqlite_journal_mode = WAL
-    
-    # Welcome message
-    motd = Welcome to my cool server
-    
-    # Debug and monitoring
-    enable_debug_log = true
-    debug_log_level = warning
-    prometheus_listener_address = 0.0.0.0:9100
-  EOT
-}
-
 # Create the Compute Engine instance
 resource "google_compute_instance" "luanti_server" {
   name         = "luanti-server"
@@ -176,6 +129,17 @@ resource "google_compute_instance" "luanti_server" {
         ]
       }
     })
+    startup-script = <<-EOF
+      #!/bin/bash
+      
+      # Download minetest.conf from your repository
+      curl -o /mnt/disks/gce-containers-mounts/gce-persistent-disks/luanti-data-disk/minetest.conf \
+        https://raw.githubusercontent.com/Jahysama/cv/main/tofu/luanti/minetest.conf
+      
+      # Set proper permissions
+      chmod 644 /mnt/disks/gce-containers-mounts/gce-persistent-disks/luanti-data-disk/minetest.conf
+    EOF
+  }
   }
 
   tags = ["luanti-server"]
