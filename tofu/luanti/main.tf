@@ -154,9 +154,10 @@ resource "google_compute_target_pool" "luanti" {
   ]
 }
 
-resource "google_compute_global_forwarding_rule" "luanti" {
+resource "google_compute_forwarding_rule" "luanti" {
   name        = "luanti-forwarding-rule"
+  region      = var.region
+  target      = google_compute_target_pool.luanti.id
   ip_address  = data.google_compute_global_address.website.address
   port_range  = "30000"
-  target      = google_compute_target_pool.luanti.id
 }
