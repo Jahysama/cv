@@ -140,7 +140,6 @@ resource "google_compute_instance" "luanti_server" {
       chmod 644 /mnt/disks/gce-containers-mounts/gce-persistent-disks/luanti-data-disk/minetest.conf
     EOF
   }
-  }
 
   tags = ["luanti-server"]
 
