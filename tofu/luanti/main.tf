@@ -78,11 +78,11 @@ resource "google_compute_instance" "luanti_server" {
           securityContext = {
           privileged = true  # Add this to ensure proper permissions
         }
-        command = [
+        entrypoint = [
           "/bin/sh",
           "-c",
-          "curl -L -o /home/app/.minetest/minetest.conf https://raw.githubusercontent.com/Jahysama/cv/main/tofu/luanti/minetest.conf && chmod 644 /home/app/.minetest/minetest.conf && su app -c '/bin/sh /etc/entry.sh --config /home/app/.minetest/minetest.conf'"
-        ]
+          "wget -O /home/app/.minetest/minetest.conf https://raw.githubusercontent.com/Jahysama/cv/main/tofu/luanti/minetest.conf && /etc/entry.sh --config /home/app/.minetest/minetest.conf"
+
           volumeMounts = [
             {
               name      = "luanti-data"
