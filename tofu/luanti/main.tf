@@ -78,12 +78,12 @@ resource "google_compute_instance" "luanti_server" {
           securityContext = {
           privileged = true  # Add this to ensure proper permissions
         }
-        command = ["/bin/sh"]
-        args = [
+        command = [
+          "/bin/sh",
           "-c",
           "curl -L -o /home/app/.minetest/minetest.conf https://raw.githubusercontent.com/Jahysama/cv/main/tofu/luanti/minetest.conf && chmod 644 /home/app/.minetest/minetest.conf && /etc/entry.sh --config /home/app/.minetest/minetest.conf"
         ]
-          volumeMounts = [
+        volumeMounts = [
             {
               name      = "luanti-data"
               mountPath = "/data" # Main data directory
