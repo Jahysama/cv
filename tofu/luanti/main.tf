@@ -24,6 +24,10 @@ resource "google_compute_address" "luanti_ip" {
   name = "luanti-server-ip"
 }
 
+data "google_compute_global_address" "website" {
+  name = "global-website-ip"  # The name from your website's configuration
+}
+
 # Create firewall rules for Luanti and monitoring
 resource "google_compute_firewall" "luanti_server" {
   name    = "allow-luanti"
@@ -131,14 +135,11 @@ resource "google_compute_instance" "luanti_server" {
   deletion_protection       = false
 }
 
-resource "google_compute_health_check" "luanti" {
+resource "google_compute_http_health_check" "luanti" {
   name               = "luanti-health-check"
-  timeout_sec        = 5
+  port               = 30000
   check_interval_sec = 5
-
-  tcp_health_check {
-    port = 30000
-  }
+  timeout_sec        = 5
 }
 
 resource "google_compute_backend_service" "luanti" {
@@ -152,4 +153,23 @@ resource "google_compute_backend_service" "luanti" {
   backend {
     group = google_compute_instance_group.luanti.id
   }
+}
+
+resource "google_compute_target_pool" "luanti" {
+  name = "luanti-target-pool"
+  
+  instances = [
+    "${var.zone}/${google_compute_instance.luanti_server.name}"
+  ]
+
+  health_checks = [
+    google_compute_http_health_check.luanti.name
+  ]
+}
+
+resource "google_compute_global_forwarding_rule" "luanti" {
+  name        = "luanti-forwarding-rule"
+  ip_address  = data.google_compute_global_address.website.address
+  port_range  = "30000"
+  target      = google_compute_target_pool.luanti.id
 }
