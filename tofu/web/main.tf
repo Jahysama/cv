@@ -95,6 +95,11 @@ resource "google_compute_target_https_proxy" "default" {
   ssl_certificates = [google_compute_managed_ssl_certificate.default.id]
 }
 
+resource "google_compute_target_udp_proxy" "luanti" {
+  name            = "luanti-proxy"
+  backend_service = google_compute_backend_service.luanti.id
+}
+
 # Create a URL map
 resource "google_compute_url_map" "default" {
   name            = "website-url-map"
@@ -149,3 +154,12 @@ resource "google_compute_global_forwarding_rule" "default" {
   port_range = "443"
   ip_address = google_compute_global_address.default.address
 }
+
+resource "google_compute_global_forwarding_rule" "luanti" {
+  name        = "luanti-forwarding-rule"
+  ip_address  = google_compute_global_address.default.address  # Use same IP as website
+  port_range  = "30000"
+  ip_protocol = "UDP"
+  target      = google_compute_target_udp_proxy.luanti.id
+}
+

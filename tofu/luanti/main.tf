@@ -43,6 +43,21 @@ resource "google_compute_firewall" "luanti_server" {
   target_tags   = ["luanti-server"]
 }
 
+resource "google_compute_instance_group" "luanti" {
+  name        = "luanti-instance-group"
+  description = "Luanti servers instance group"
+  zone        = var.zone
+
+  instances = [
+    google_compute_instance.luanti_server.id,
+  ]
+
+  named_port {
+    name = "game"
+    port = 30000
+  }
+}
+
 # Create the Compute Engine instance
 resource "google_compute_instance" "luanti_server" {
   name         = "luanti-server"
@@ -114,4 +129,27 @@ resource "google_compute_instance" "luanti_server" {
 
   allow_stopping_for_update = true
   deletion_protection       = false
+}
+
+resource "google_compute_health_check" "luanti" {
+  name               = "luanti-health-check"
+  timeout_sec        = 5
+  check_interval_sec = 5
+
+  tcp_health_check {
+    port = 30000
+  }
+}
+
+resource "google_compute_backend_service" "luanti" {
+  name        = "luanti-backend"
+  protocol    = "UDP"
+  timeout_sec = 30
+  port_name   = "game"
+
+  health_checks = [google_compute_health_check.luanti.id]
+
+  backend {
+    group = google_compute_instance_group.luanti.id
+  }
 }
