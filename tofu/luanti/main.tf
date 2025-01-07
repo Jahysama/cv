@@ -81,7 +81,7 @@ resource "google_compute_instance" "luanti_server" {
         command = [
           "/bin/sh",
           "-c",
-          "curl -L -o /home/app/.minetest/minetest.conf https://raw.githubusercontent.com/Jahysama/cv/main/tofu/luanti/minetest.conf && chmod 644 /home/app/.minetest/minetest.conf && chmod +x /etc/entry.sh && exec /etc/entry.sh --config /home/app/.minetest/minetest.conf"
+          "curl -L -o /home/app/.minetest/minetest.conf https://raw.githubusercontent.com/Jahysama/cv/main/tofu/luanti/minetest.conf && chmod 644 /home/app/.minetest/minetest.conf && su app -c '/bin/sh /etc/entry.sh --config /home/app/.minetest/minetest.conf'"
         ]
           volumeMounts = [
             {
