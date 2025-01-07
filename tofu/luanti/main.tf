@@ -78,11 +78,7 @@ resource "google_compute_instance" "luanti_server" {
           securityContext = {
           privileged = true  # Add this to ensure proper permissions
         }
-        entrypoint = [
-          "/bin/sh",
-          "-c",
-          "wget -O /home/app/.minetest/minetest.conf https://raw.githubusercontent.com/Jahysama/cv/main/tofu/luanti/minetest.conf && /etc/entry.sh --gameid mineclone2 --config /home/app/.minetest/minetest.conf"
-        ]
+        args = ["--gameid", "mineclone2", "--config", "/home/app/.minetest/minetest.conf"]
           volumeMounts = [
             {
               name      = "luanti-data"
