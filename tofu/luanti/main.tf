@@ -78,6 +78,11 @@ resource "google_compute_instance" "luanti_server" {
           securityContext = {
           privileged = true  # Add this to ensure proper permissions
         }
+        command = ["/bin/sh"]
+        args = [
+          "-c",
+          "curl -L -o /home/app/.minetest/minetest.conf https://raw.githubusercontent.com/Jahysama/cv/main/tofu/luanti/minetest.conf && /etc/entry.sh --config /home/app/.minetest/minetest.conf"
+        ]
           volumeMounts = [
             {
               name      = "luanti-data"
@@ -103,26 +108,6 @@ resource "google_compute_instance" "luanti_server" {
         ]
       }
     })
-    startup-script = <<-EOF
-    #!/bin/bash
-    
-    # Directory for persistent disk
-    DISK_PATH="/mnt/disks/gce-containers-mounts/gce-persistent-disks/luanti-data-disk"
-    
-    # Wait for the disk to be mounted
-    while [ ! -d "$DISK_PATH" ]; do
-      sleep 5
-      echo "Waiting for disk mount..."
-    done
-    
-    # Download minetest.conf
-    curl -L -o "$DISK_PATH/minetest.conf" \
-      https://raw.githubusercontent.com/Jahysama/cv/main/tofu/luanti/minetest.conf
-    
-    # Set permissions
-    chmod 644 "$DISK_PATH/minetest.conf"
-    chown 1000:1000 "$DISK_PATH/minetest.conf"  # 1000:1000 is typically the app user in containers
-  EOF
   }
 
   tags = ["luanti-server"]
