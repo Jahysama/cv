@@ -48,6 +48,7 @@ resource "google_compute_instance" "luanti_server" {
   name         = "luanti-server"
   machine_type = var.machine_type
   zone         = var.zone
+  instance_id = timestamp()
 
   attached_disk {
     source      = google_compute_disk.luanti_data.self_link
