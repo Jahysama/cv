@@ -1,6 +1,6 @@
-output "luanti_server_ip" {
-  value = google_compute_address.luanti_ip.address
-  description = "The public IP address of the Luanti server"
+output "game_server_ip" {
+  value = google_compute_address.luanti_game.address
+  description = "The IP address for the game server. Add an A record for your domain pointing to this IP."
 }
 
 output "luanti_server_domain" {
