@@ -20,10 +20,8 @@ resource "google_compute_disk" "luanti_data" {
 }
 
 # Create a static IP
-resource "google_compute_address" "luanti_game" {
-  name         = "luanti-game-ip"
-  region       = var.region
-  address_type = "EXTERNAL"
+resource "google_compute_address" "luanti_ip" {
+  name = "luanti-server-ip"
 }
 
 # Create firewall rules for Luanti and monitoring
@@ -43,21 +41,6 @@ resource "google_compute_firewall" "luanti_server" {
 
   source_ranges = ["0.0.0.0/0"]
   target_tags   = ["luanti-server"]
-}
-
-resource "google_compute_instance_group" "luanti" {
-  name        = "luanti-instance-group"
-  description = "Luanti servers instance group"
-  zone        = var.zone
-
-  instances = [
-    google_compute_instance.luanti_server.id,
-  ]
-
-  named_port {
-    name = "game"
-    port = 30000
-  }
 }
 
 # Create the Compute Engine instance
@@ -82,7 +65,7 @@ resource "google_compute_instance" "luanti_server" {
   network_interface {
     network = "default"
     access_config {
-      nat_ip = google_compute_address.luanti_game.address
+      nat_ip = google_compute_address.luanti_ip.address
     }
   }
 
@@ -131,31 +114,4 @@ resource "google_compute_instance" "luanti_server" {
 
   allow_stopping_for_update = true
   deletion_protection       = false
-}
-
-resource "google_compute_http_health_check" "luanti" {
-  name               = "luanti-health-check"
-  port               = 30000
-  check_interval_sec = 5
-  timeout_sec        = 5
-}
-
-resource "google_compute_target_pool" "luanti" {
-  name = "luanti-target-pool"
-  
-  instances = [
-    "${var.zone}/${google_compute_instance.luanti_server.name}"
-  ]
-
-  health_checks = [
-    google_compute_http_health_check.luanti.name
-  ]
-}
-
-resource "google_compute_forwarding_rule" "luanti" {
-  name        = "luanti-forwarding-rule"
-  region      = var.region
-  target      = google_compute_target_pool.luanti.id
-  ip_address  = google_compute_address.luanti_game.address
-  port_range  = "30000"
 }
