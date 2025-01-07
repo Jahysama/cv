@@ -82,7 +82,7 @@ resource "google_compute_instance" "luanti_server" {
           "/bin/sh",
           "-c",
           "wget -O /home/app/.minetest/minetest.conf https://raw.githubusercontent.com/Jahysama/cv/main/tofu/luanti/minetest.conf && /etc/entry.sh --config /home/app/.minetest/minetest.conf"
-
+        ]
           volumeMounts = [
             {
               name      = "luanti-data"
