@@ -1,11 +1,12 @@
-from fastapi import APIRouter, Request, HTTPException
-from fastapi.responses import HTMLResponse
-from bs4 import BeautifulSoup
 import asyncio
 import glob
-from datetime import datetime
 import xml.etree.ElementTree as ET
-from app.utils import read_file, parse_markdown_file, generate_blog_html
+from datetime import datetime
+
+from app.utils import generate_blog_html, parse_markdown_file, read_file
+from bs4 import BeautifulSoup
+from fastapi import APIRouter, HTTPException, Request
+from fastapi.responses import HTMLResponse
 
 router = APIRouter()
 
@@ -96,32 +97,37 @@ async def serve_atom_feed():
     posts = await get_blog_posts()
     domain = "https://kosaretsky.co.uk"
     atom = ET.Element("feed", xmlns="http://www.w3.org/2005/Atom")
-    
+
     # Add title
     ET.SubElement(atom, "title").text = "Egor's personal blog"
-    
+
     # Add both required link elements
     ET.SubElement(atom, "link", href=domain, rel="alternate", type="text/html")
-    ET.SubElement(atom, "link", href=f"{domain}/atom.xml", rel="self", type="application/atom+xml")
-    
+    ET.SubElement(
+        atom, "link", href=f"{domain}/atom.xml", rel="self", type="application/atom+xml"
+    )
+
     # Add updated timestamp
     ET.SubElement(atom, "updated").text = datetime.utcnow().isoformat("T") + "Z"
-    
+
     # Add ID with trailing slash for canonical form
     ET.SubElement(atom, "id").text = f"{domain}/"
-    
+
     # Add author
     author = ET.SubElement(atom, "author")
     ET.SubElement(author, "name").text = "Egor Kosaretsky"
-    
+
     # Add entries
     for post in posts:
         entry = ET.SubElement(atom, "entry")
         ET.SubElement(entry, "title").text = post["title"]
-        ET.SubElement(entry, "link", 
-                     href=f"{domain}/blog/{post['slug']}", 
-                     rel="alternate",
-                     type="text/html")
+        ET.SubElement(
+            entry,
+            "link",
+            href=f"{domain}/blog/{post['slug']}",
+            rel="alternate",
+            type="text/html",
+        )
         ET.SubElement(entry, "id").text = f"{domain}/blog/{post['slug']}"
         ET.SubElement(entry, "updated").text = (
             datetime.strptime(post["date"], "%Y-%m-%d").isoformat("T") + "Z"
@@ -129,7 +135,7 @@ async def serve_atom_feed():
         ET.SubElement(entry, "summary").text = post.get("excerpt", "")
         content = ET.SubElement(entry, "content", type="html")
         content.text = post.get("content", "")
-    
+
     atom_xml = ET.tostring(atom, encoding="unicode", method="xml")
     return HTMLResponse(
         content=f'<?xml version="1.0" encoding="UTF-8"?>\n{atom_xml}',
