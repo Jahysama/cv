@@ -42,7 +42,7 @@ variable "tf_state_bucket" {
 variable "domain_name" {
   description = "The domain name for the website"
   type        = string
-  default     = "kosaretsky.co.uk"
+  default     = "mlship.dev"
 }
 
 variable "static_ip_name" {

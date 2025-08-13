@@ -79,7 +79,6 @@ resource "google_compute_global_address" "default" {
   name = "global-website-ip"
 }
 
-# Create the managed SSL certificate
 resource "google_compute_managed_ssl_certificate" "default" {
   name = "website-cert"
 
@@ -88,17 +87,45 @@ resource "google_compute_managed_ssl_certificate" "default" {
   }
 }
 
-# Create the HTTPS load balancer
+# Create the managed SSL certificate for the old domain
+resource "google_compute_managed_ssl_certificate" "old_domain" {
+  name = "old-domain-cert"
+
+  managed {
+    domains = ["kosaretsky.co.uk"]
+  }
+}
+
+# Create the HTTPS load balancer for the primary domain
 resource "google_compute_target_https_proxy" "default" {
   name             = "website-target-proxy"
   url_map          = google_compute_url_map.default.id
   ssl_certificates = [google_compute_managed_ssl_certificate.default.id]
 }
 
-# Create a URL map
+# Create the HTTPS load balancer for the old domain
+resource "google_compute_target_https_proxy" "old_domain" {
+  name             = "old-domain-target-proxy"
+  url_map          = google_compute_url_map.old_domain.id
+  ssl_certificates = [google_compute_managed_ssl_certificate.old_domain.id]
+}
+
+# Create a URL map for the primary domain
 resource "google_compute_url_map" "default" {
   name            = "website-url-map"
   default_service = google_compute_backend_service.default.id
+}
+
+# Create a URL map for the old domain (redirect to new domain)
+resource "google_compute_url_map" "old_domain" {
+  name = "old-domain-url-map"
+
+  default_url_redirect {
+    host_redirect          = var.domain_name
+    https_redirect         = true
+    redirect_response_code = "MOVED_PERMANENTLY_DEFAULT"
+    strip_query            = false
+  }
 }
 
 # Create a backend service
@@ -142,10 +169,72 @@ resource "google_compute_instance_group" "webservers" {
   }
 }
 
-# Create a global forwarding rule
+# Create a global forwarding rule for the primary domain (HTTPS)
 resource "google_compute_global_forwarding_rule" "default" {
   name       = "website-forwarding-rule"
   target     = google_compute_target_https_proxy.default.id
   port_range = "443"
   ip_address = google_compute_global_address.default.address
+}
+
+# Create a global IP address for the old domain
+resource "google_compute_global_address" "old_domain" {
+  name = "old-domain-global-ip"
+}
+
+# Create a global forwarding rule for the old domain (HTTPS)
+resource "google_compute_global_forwarding_rule" "old_domain_https" {
+  name       = "old-domain-forwarding-rule-https"
+  target     = google_compute_target_https_proxy.old_domain.id
+  port_range = "443"
+  ip_address = google_compute_global_address.old_domain.address
+}
+
+# Create HTTP to HTTPS redirect for the primary domain
+resource "google_compute_url_map" "http_redirect" {
+  name = "http-redirect-url-map"
+
+  default_url_redirect {
+    https_redirect         = true
+    redirect_response_code = "MOVED_PERMANENTLY_DEFAULT"
+    strip_query            = false
+  }
+}
+
+# Create HTTP to HTTPS redirect for the old domain
+resource "google_compute_url_map" "old_domain_http_redirect" {
+  name = "old-domain-http-redirect-url-map"
+
+  default_url_redirect {
+    host_redirect          = var.domain_name
+    https_redirect         = true
+    redirect_response_code = "MOVED_PERMANENTLY_DEFAULT"
+    strip_query            = false
+  }
+}
+
+# Create HTTP target proxies
+resource "google_compute_target_http_proxy" "http_redirect" {
+  name    = "http-redirect-target-proxy"
+  url_map = google_compute_url_map.http_redirect.id
+}
+
+resource "google_compute_target_http_proxy" "old_domain_http_redirect" {
+  name    = "old-domain-http-redirect-target-proxy"
+  url_map = google_compute_url_map.old_domain_http_redirect.id
+}
+
+# Create HTTP forwarding rules
+resource "google_compute_global_forwarding_rule" "http_redirect" {
+  name       = "http-redirect-forwarding-rule"
+  target     = google_compute_target_http_proxy.http_redirect.id
+  port_range = "80"
+  ip_address = google_compute_global_address.default.address
+}
+
+resource "google_compute_global_forwarding_rule" "old_domain_http_redirect" {
+  name       = "old-domain-http-redirect-forwarding-rule"
+  target     = google_compute_target_http_proxy.old_domain_http_redirect.id
+  port_range = "80"
+  ip_address = google_compute_global_address.old_domain.address
 }
