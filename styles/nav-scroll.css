@@ -1,0 +1,96 @@
+/* Override the responsive.css vertical stacking for navigation */
+@media (max-width: 768px) {
+  nav {
+    /* Keep horizontal layout */
+    flex-direction: row !important;
+    flex-wrap: nowrap;
+
+    /* Enable horizontal scrolling */
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+
+    /* Hide scrollbar but keep functionality */
+    scrollbar-width: thin;
+    scrollbar-color: var(--surface2) transparent;
+
+    /* DON'T center - use flex-start to prevent cut-off */
+    justify-content: flex-start;
+    align-items: center;
+
+    /* Add padding for better scroll experience and prevent cut-off */
+    padding: 10px 20px;
+    margin-bottom: 20px;
+
+    /* Enable scroll snapping for better UX */
+    scroll-snap-type: x proximity;
+
+    /* Ensure content doesn't get cut off */
+    box-sizing: border-box;
+  }
+
+  /* Add space before first button to create centering effect */
+  nav button:first-child {
+    margin-left: auto;
+  }
+
+  /* Add space after last button to create centering effect */
+  nav button:last-child {
+    margin-right: auto;
+  }
+
+  /* Hide scrollbar for Chrome, Safari and Opera */
+  nav::-webkit-scrollbar {
+    height: 4px;
+  }
+
+  nav::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  nav::-webkit-scrollbar-thumb {
+    background: var(--surface2);
+    border-radius: 2px;
+  }
+
+  nav::-webkit-scrollbar-thumb:hover {
+    background: var(--surface1);
+  }
+
+  nav button {
+    /* Prevent buttons from shrinking */
+    flex-shrink: 0;
+
+    /* Keep reasonable width */
+    min-width: auto;
+    width: auto;
+
+    /* Reset full-width from responsive.css */
+    margin-bottom: 0 !important;
+
+    /* Maintain spacing between buttons */
+    margin-right: 10px;
+
+    /* Snap alignment */
+    scroll-snap-align: center;
+  }
+
+  nav button:last-child {
+    /* Remove margin from last button */
+    margin-right: 0;
+  }
+
+  nav a {
+    /* Reset width override */
+    width: auto !important;
+    min-width: auto;
+  }
+}
+
+/* For very narrow screens, add side padding to ensure centering */
+@media (max-width: 480px) {
+  nav {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+}

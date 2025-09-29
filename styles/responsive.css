@@ -1,180 +1,213 @@
 /* Base styles */
-body, html {
-    font-size: 16px; /* Base font size for better readability on mobile */
+body,
+html {
+  font-size: 16px; /* Base font size for better readability on mobile */
 }
 
 /* Responsive layout */
 @media (max-width: 768px) {
-    .container {
-        padding: 10px; /* Reduce padding on smaller screens */
-    }
+  .container {
+    padding: 10px; /* Reduce padding on smaller screens */
+  }
 
-    #main-content {
-        padding: 15px;
-    }
+  #main-content {
+    padding: 15px;
+  }
 
-    h1 {
-        font-size: 2em; /* Slightly smaller heading on mobile */
-    }
+  h1 {
+    font-size: 2em; /* Slightly smaller heading on mobile */
+  }
 
-    h2 {
-        font-size: 1.5em;
-    }
+  h2 {
+    font-size: 1.5em;
+  }
 }
 
-/* Improved navigation for mobile */
+/* Improved navigation for mobile - HORIZONTAL SCROLLING */
 @media (max-width: 768px) {
-    nav {
-        flex-direction: column;
-        align-items: stretch;
-    }
+  nav {
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    overflow-x: auto;
+    overflow-y: hidden;
+    gap: 8px;
+    padding-bottom: 10px;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+    scrollbar-color: var(--lavender) var(--surface0);
+  }
 
-    nav button, nav a {
-        width: 100%;
-        margin-bottom: 10px;
-        text-align: center;
-    }
+  /* Hide scrollbar but keep functionality */
+  nav::-webkit-scrollbar {
+    height: 4px;
+  }
+
+  nav::-webkit-scrollbar-track {
+    background: var(--surface0);
+    border-radius: 2px;
+  }
+
+  nav::-webkit-scrollbar-thumb {
+    background: var(--lavender);
+    border-radius: 2px;
+  }
+
+  nav button {
+    flex-shrink: 0;
+    white-space: nowrap;
+    min-width: auto;
+    padding: 10px 16px;
+    font-size: 14px;
+    min-height: 44px;
+  }
 }
 
 /* Responsive form */
 @media (max-width: 768px) {
-    .contact-form {
-        padding: 15px;
-    }
+  .contact-form {
+    padding: 15px;
+  }
 
-    .form-group input,
-    .form-group textarea {
-        font-size: 16px;
-        padding: 12px; /* Larger touch targets */
-    }
+  .form-group input,
+  .form-group textarea {
+    font-size: 16px;
+    padding: 12px; /* Larger touch targets */
+  }
 
-    .submit-btn {
-        width: 100%; /* Full-width button on mobile */
-        padding: 12px;
-    }
+  .submit-btn {
+    width: 100%; /* Full-width button on mobile */
+    padding: 12px;
+  }
 }
 
 /* Responsive grid layouts */
 @media (max-width: 768px) {
-    .projects-grid,
-    .blog-grid {
-        grid-template-columns: 1fr; /* Single column on mobile */
-        gap: 15px;
-    }
+  .projects-grid,
+  .blog-grid {
+    grid-template-columns: 1fr; /* Single column on mobile */
+    gap: 15px;
+  }
 }
 
 /* Responsive images */
 @media (max-width: 768px) {
-    img, .profile-img {
-        max-width: 100%;
-        height: auto;
-    }
+  img,
+  .profile-img {
+    max-width: 100%;
+    height: auto;
+  }
 
-    .profile-container {
-        flex-direction: column;
-        align-items: center;
-    }
+  .profile-container {
+    flex-direction: column;
+    align-items: center;
+  }
 
-    .profile-img {
-        margin-right: 0;
-        margin-bottom: 20px;
-        width: 150px; /* Smaller profile image on mobile */
-    }
+  .profile-img {
+    margin-right: 0;
+    margin-bottom: 20px;
+    width: 150px; /* Smaller profile image on mobile */
+  }
 }
 
 /* Adjustments for very small screens */
 @media (max-width: 320px) {
-    body, html {
-        font-size: 14px; /* Slightly smaller base font size for very small screens */
-    }
+  body,
+  html {
+    font-size: 14px; /* Slightly smaller base font size for very small screens */
+  }
 
-    .container {
-        padding: 5px;
-    }
+  .container {
+    padding: 5px;
+  }
 
-    #main-content {
-        padding: 10px;
-    }
+  #main-content {
+    padding: 10px;
+  }
 }
 
 /* Ensure buttons and links are easily tappable on mobile */
 @media (max-width: 768px) {
-    a, button, .submit-btn {
-        min-height: 44px; /* Minimum touch target size */
-        line-height: 44px;
-        padding: 0 16px;
-    }
+  a,
+  button,
+  .submit-btn {
+    min-height: 44px; /* Minimum touch target size */
+    line-height: 44px;
+    padding: 0 16px;
+  }
 }
 
 /* Responsive adjustments for ASCII art */
 @media (max-width: 1024px) {
-    #ascii-mountains pre {
-        font-size: 12px;
-    }
+  #ascii-mountains pre {
+    font-size: 12px;
+  }
 }
 
 @media (max-width: 768px) {
-    #ascii-mountains pre {
-        font-size: 10px;
-    }
+  #ascii-mountains pre {
+    font-size: 10px;
+  }
 }
 
 @media (max-width: 480px) {
-    #ascii-mountains pre {
-        font-size: 8px;
-    }
+  #ascii-mountains pre {
+    font-size: 8px;
+  }
 }
 
 @media (max-width: 320px) {
-    #ascii-mountains pre {
-        font-size: 6px;
-    }
+  #ascii-mountains pre {
+    font-size: 6px;
+  }
 }
 
 /* Ensure horizontal scrolling is smooth on touch devices */
 @media (max-width: 768px) {
-    #ascii-mountains {
-        -webkit-overflow-scrolling: touch;
-        scrollbar-width: none; /* Hide scrollbar for Firefox */
-        -ms-overflow-style: none; /* Hide scrollbar for IE and Edge */
-    }
+  #ascii-mountains {
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none; /* Hide scrollbar for Firefox */
+    -ms-overflow-style: none; /* Hide scrollbar for IE and Edge */
+  }
 
-    #ascii-mountains::-webkit-scrollbar {
-        display: none; /* Hide scrollbar for Chrome, Safari, and Opera */
-    }
+  #ascii-mountains::-webkit-scrollbar {
+    display: none; /* Hide scrollbar for Chrome, Safari, and Opera */
+  }
 }
+
 /* Improve readability of code blocks on mobile */
 @media (max-width: 768px) {
-    .blog-post .post-content pre {
-        padding: 10px;
-        font-size: 12px;
-        white-space: pre-wrap;
-        word-wrap: break-word;
-    }
+  .blog-post .post-content pre {
+    padding: 10px;
+    font-size: 12px;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+  }
 }
 
 @media (max-width: 768px) {
-    #main-content .blog-post {
-        padding: 15px;
-    }
+  #main-content .blog-post {
+    padding: 15px;
+  }
 
-    #main-content .blog-post .post-header {
-        padding-top: 30px; /* Slightly less space on mobile */
-    }
+  #main-content .blog-post .post-header {
+    padding-top: 30px; /* Slightly less space on mobile */
+  }
 
-    #main-content .blog-post .copy-link-btn {
-        font-size: 12px;
-        padding: 4px 8px;
-    }
+  #main-content .blog-post .copy-link-btn {
+    font-size: 12px;
+    padding: 4px 8px;
+  }
 
-    #main-content .blog-post h1 {
-        font-size: 1.5em; /* Smaller heading on mobile */
-    }
+  #main-content .blog-post h1 {
+    font-size: 1.5em; /* Smaller heading on mobile */
+  }
 }
+
 @media (max-width: 768px) {
-    #main-content .blog-post .copy-link-btn {
-        min-height: 44px;
-        line-height: 44px;
-        padding: 0 12px;
-    }
+  #main-content .blog-post .copy-link-btn {
+    min-height: 44px;
+    line-height: 44px;
+    padding: 0 12px;
+  }
 }
