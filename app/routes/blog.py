@@ -1,10 +1,8 @@
 from fastapi import APIRouter, Request, HTTPException
-from fastapi.responses import HTMLResponse
+from fastapi.responses import HTMLResponse, FileResponse
 from bs4 import BeautifulSoup
 import asyncio
 import glob
-from datetime import datetime
-import xml.etree.ElementTree as ET
 from app.utils import read_file, parse_markdown_file, generate_blog_html
 
 router = APIRouter()
@@ -30,13 +28,13 @@ async def serve_blog_post(request: Request, slug: str):
         blog_post_content = f"""
         <article class="blog-post">
             <div class="post-header">
-                <button id="copyLinkBtn" class="copy-link-btn" onclick="copyPostLink('{post['slug']}')">
+                <button id="copyLinkBtn" class="copy-link-btn" onclick="copyPostLink('{post["slug"]}')">
                     Copy Link
                 </button>
-                <h1>{post['title']}</h1>
-                <p class="post-date">{post['date']}</p>
+                <h1>{post["title"]}</h1>
+                <p class="post-date">{post["date"]}</p>
             </div>
-            <div class="post-content">{post['content']}</div>
+            <div class="post-content">{post["content"]}</div>
         </article>
         <script>
         function copyPostLink(slug) {{
@@ -68,10 +66,10 @@ async def serve_blog_post(request: Request, slug: str):
                 "excerpt", ""
             )
             soup.find("meta", property="og:image")["content"] = (
-                f"https://kosaretsky.co.uk/assets/opengraph/images/{slug}.png"
+                f"https://mlship.dev/assets/opengraph/images/{slug}.png"
             )
             soup.find("meta", property="og:url")["content"] = (
-                f"https://kosaretsky.co.uk/blog/{slug}"
+                f"https://mlship.dev/blog/{slug}"
             )
             soup.find("meta", property="og:type")["content"] = "article"
 
@@ -93,45 +91,39 @@ async def serve_blog_posts():
 
 @router.get("/atom.xml")
 async def serve_atom_feed():
-    posts = await get_blog_posts()
-    domain = "https://kosaretsky.co.uk"
-    atom = ET.Element("feed", xmlns="http://www.w3.org/2005/Atom")
-    
-    # Add title
-    ET.SubElement(atom, "title").text = "Egor's personal blog"
-    
-    # Add both required link elements
-    ET.SubElement(atom, "link", href=domain, rel="alternate", type="text/html")
-    ET.SubElement(atom, "link", href=f"{domain}/atom.xml", rel="self", type="application/atom+xml")
-    
-    # Add updated timestamp
-    ET.SubElement(atom, "updated").text = datetime.utcnow().isoformat("T") + "Z"
-    
-    # Add ID with trailing slash for canonical form
-    ET.SubElement(atom, "id").text = f"{domain}/"
-    
-    # Add author
-    author = ET.SubElement(atom, "author")
-    ET.SubElement(author, "name").text = "Egor Kosaretsky"
-    
-    # Add entries
-    for post in posts:
-        entry = ET.SubElement(atom, "entry")
-        ET.SubElement(entry, "title").text = post["title"]
-        ET.SubElement(entry, "link", 
-                     href=f"{domain}/blog/{post['slug']}", 
-                     rel="alternate",
-                     type="text/html")
-        ET.SubElement(entry, "id").text = f"{domain}/blog/{post['slug']}"
-        ET.SubElement(entry, "updated").text = (
-            datetime.strptime(post["date"], "%Y-%m-%d").isoformat("T") + "Z"
+    """Serve the pregenerated atom.xml file"""
+    try:
+        return FileResponse(
+            "atom.xml",
+            media_type="application/atom+xml",
+            headers={"Cache-Control": "public, max-age=3600"},  # Cache for 1 hour
         )
-        ET.SubElement(entry, "summary").text = post.get("excerpt", "")
-        content = ET.SubElement(entry, "content", type="html")
-        content.text = post.get("content", "")
-    
-    atom_xml = ET.tostring(atom, encoding="unicode", method="xml")
-    return HTMLResponse(
-        content=f'<?xml version="1.0" encoding="UTF-8"?>\n{atom_xml}',
-        media_type="application/atom+xml",
-    )
+    except FileNotFoundError:
+        raise HTTPException(status_code=404, detail="Atom feed not found")
+
+
+@router.get("/rss.xml")
+async def serve_rss_feed():
+    """Serve the pregenerated rss.xml file"""
+    try:
+        return FileResponse(
+            "rss.xml",
+            media_type="application/rss+xml",
+            headers={"Cache-Control": "public, max-age=3600"},  # Cache for 1 hour
+        )
+    except FileNotFoundError:
+        raise HTTPException(status_code=404, detail="RSS feed not found")
+
+
+@router.get("/feed")
+@router.get("/feed.xml")
+async def serve_default_feed():
+    """Redirect common feed URLs to RSS feed"""
+    try:
+        return FileResponse(
+            "rss.xml",
+            media_type="application/rss+xml",
+            headers={"Cache-Control": "public, max-age=3600"},
+        )
+    except FileNotFoundError:
+        raise HTTPException(status_code=404, detail="Feed not found")

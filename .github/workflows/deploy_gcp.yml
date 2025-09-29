@@ -27,10 +27,13 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install Pillow cairosvg PyYAML
+          pip install Pillow cairosvg PyYAML markdown
 
       - name: Generate OG images
         run: python .github/workflows/generate_og_images.py
+
+      - name: Generate Atom feed
+        run: python .github/workflows/generate_atom_feed.py
 
       - name: Authenticate to Google Cloud
         uses: "google-github-actions/auth@v1"
