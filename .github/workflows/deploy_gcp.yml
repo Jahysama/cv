@@ -33,7 +33,7 @@ jobs:
         run: python .github/workflows/generate_og_images.py
 
       - name: Generate Atom feed
-        run: python .github/workflows/generate_atom_feed.py
+        run: python .github/workflows/generate_feeds.py
 
       - name: Authenticate to Google Cloud
         uses: "google-github-actions/auth@v1"
