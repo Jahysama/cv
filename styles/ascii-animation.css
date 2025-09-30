@@ -1,0 +1,24 @@
+.ascii-frame {
+  font-family: "Courier New", monospace;
+  font-size: 6px; /* ← Changed from 12px to 6px (half size) */
+  line-height: 1;
+  margin: 0;
+  padding: 0;
+  color: var(--mauve);
+  white-space: pre;
+  overflow-x: auto;
+  max-width: 100%;
+}
+
+/* Also update responsive sizes */
+@media (max-width: 768px) {
+  .ascii-frame {
+    font-size: 5px; /* ← Half of 10px */
+  }
+}
+
+@media (max-width: 480px) {
+  .ascii-frame {
+    font-size: 4px; /* ← Half of 8px */
+  }
+}
