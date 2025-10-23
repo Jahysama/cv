@@ -52,17 +52,35 @@ def post_to_telegram(bot_token: str, channel_id: str, message: str) -> bool:
     }
 
     try:
-        response = requests.post(url, json=payload)
-        response.raise_for_status()
+        print(f"Posting to Telegram channel: {channel_id}", file=sys.stderr)
+        print(f"Message length: {len(message)} characters", file=sys.stderr)
 
-        result = response.json()
-        if result.get("ok"):
-            print(f"✓ Successfully posted to Telegram")
+        response = requests.post(url, json=payload, timeout=10)
+
+        # Try to parse response even if status code is error
+        try:
+            result = response.json()
+        except:
+            result = {}
+
+        if response.status_code == 200 and result.get("ok"):
+            print(f"✓ Successfully posted to Telegram", file=sys.stderr)
             return True
         else:
-            print(f"✗ Telegram API error: {result.get('description')}", file=sys.stderr)
+            # Show detailed error from Telegram
+            error_desc = result.get("description", "No error description")
+            error_code = result.get("error_code", response.status_code)
+            print(
+                f"✗ Telegram API error (code {error_code}): {error_desc}",
+                file=sys.stderr,
+            )
+            print(f"  Channel ID used: {channel_id}", file=sys.stderr)
+            print(f"  Response: {result}", file=sys.stderr)
             return False
 
+    except requests.exceptions.Timeout:
+        print(f"✗ Telegram API timeout", file=sys.stderr)
+        return False
     except requests.exceptions.RequestException as e:
         print(f"✗ Failed to post to Telegram: {e}", file=sys.stderr)
         return False
