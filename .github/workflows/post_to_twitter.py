@@ -225,7 +225,8 @@ def main():
     with open("twitter_results.json", "w") as f:
         json.dump(output, f, indent=2)
 
-    return 0 if successful_posts else 1
+    # Always return 0 - no posts isn't an error, just means nothing to do
+    return 0
 
 
 if __name__ == "__main__":

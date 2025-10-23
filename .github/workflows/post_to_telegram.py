@@ -130,20 +130,29 @@ def main():
         platforms = post_info.get("platforms", [])
 
         if "telegram" not in platforms:
-            print(f"○ Skipping {file_path} (Telegram not in platforms list)")
+            print(
+                f"○ Skipping {file_path} (Telegram not in platforms list)",
+                file=sys.stderr,
+            )
             continue
 
-        print(f"\nProcessing: {file_path}")
-        print(f"Title: {post_info.get('title')}")
+        print(f"\n{'=' * 60}", file=sys.stderr)
+        print(f"Processing: {file_path}", file=sys.stderr)
+        print(f"Title: {post_info.get('title')}", file=sys.stderr)
+        print(f"URL: {post_info.get('url')}", file=sys.stderr)
 
         message = format_telegram_message(post_info)
 
         if args.dry_run:
-            print("\n--- DRY RUN: Would post this message ---")
-            print(message)
-            print("--- END MESSAGE ---\n")
+            print("\n--- DRY RUN: Would post this message ---", file=sys.stderr)
+            print(message, file=sys.stderr)
+            print("--- END MESSAGE ---\n", file=sys.stderr)
             successful_posts.append(file_path)
         else:
+            print("\n--- Message to post ---", file=sys.stderr)
+            print(message, file=sys.stderr)
+            print("--- End message ---\n", file=sys.stderr)
+
             success = post_to_telegram(args.bot_token, args.channel_id, message)
 
             if success:
