@@ -1,0 +1,94 @@
+name: Cross-Post Blog Content
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'blog_posts/*.md'
+
+jobs:
+  cross-post:
+    name: Post to Social Media
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 2  # Need history to detect changes
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.9"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install PyYAML requests
+
+      - name: Detect posts to publish
+        id: detect
+        run: |
+          python .github/workflows/detect_posts_to_publish.py > posts.json
+          
+          # Check if there are any posts
+          if [ -s posts.json ] && [ "$(cat posts.json)" != "{}" ]; then
+            echo "has_posts=true" >> $GITHUB_OUTPUT
+            echo "Posts to publish:"
+            cat posts.json | python -m json.tool
+          else
+            echo "has_posts=false" >> $GITHUB_OUTPUT
+            echo "No posts need publishing"
+          fi
+
+      - name: Post to Telegram
+        if: steps.detect.outputs.has_posts == 'true'
+        run: |
+          python .github/workflows/post_to_telegram.py \
+            --bot-token "${{ secrets.TELEGRAM_BOT_TOKEN }}" \
+            --channel-id "${{ secrets.TELEGRAM_CHANNEL_ID }}" \
+            --posts-json posts.json
+
+      - name: Update frontmatter for successful posts
+        if: steps.detect.outputs.has_posts == 'true'
+        run: |
+          # Read the results from Telegram posting
+          if [ -f telegram_results.json ]; then
+            # Extract successful posts and mark them as posted
+            python << 'EOF'
+          import json
+          import subprocess
+          
+          with open('telegram_results.json', 'r') as f:
+              results = json.load(f)
+          
+          successful_posts = results.get('successful_posts', [])
+          platform = results.get('platform', 'telegram')
+          
+          for file_path in successful_posts:
+              print(f"Marking {file_path} as posted to {platform}")
+              subprocess.run([
+                  'python',
+                  '.github/workflows/detect_posts_to_publish.py',
+                  '--update',
+                  f'{file_path}:{platform}'
+              ], check=True)
+          EOF
+          fi
+
+      - name: Commit frontmatter updates
+        if: steps.detect.outputs.has_posts == 'true'
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          
+          # Check if there are changes to commit
+          if git diff --quiet; then
+            echo "No changes to commit"
+          else
+            git add blog_posts/*.md
+            git commit -m "Update posting status for blog posts [skip ci]"
+            git push
+          fi
