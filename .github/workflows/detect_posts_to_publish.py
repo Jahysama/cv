@@ -38,10 +38,7 @@ def get_changed_markdown_files() -> List[str]:
         return markdown_files
     except subprocess.CalledProcessError as e:
         # If git command fails, try to get all markdown files (fallback for first commit)
-        print(
-            f"Warning: Could not get git diff, using all markdown files",
-            file=sys.stderr,
-        )
+        # Log to stderr only
         return glob.glob("blog_posts/*.md")
 
 
@@ -176,10 +173,11 @@ def detect_posts_to_publish() -> Dict[str, Dict]:
     changed_files = get_changed_markdown_files()
 
     if not changed_files:
-        print("No markdown files changed in last commit")
+        # No error message here - just return empty dict
         return posts_to_publish
 
-    print(f"Found {len(changed_files)} changed markdown file(s)")
+    # Only print to stderr so it doesn't break JSON output
+    print(f"Found {len(changed_files)} changed markdown file(s)", file=sys.stderr)
 
     for file_path in changed_files:
         metadata = parse_frontmatter(file_path)
@@ -203,9 +201,12 @@ def detect_posts_to_publish() -> Dict[str, Dict]:
                 "abstract": metadata.get("abstract", metadata.get("excerpt", "")),
             }
 
-            print(f"✓ {file_path} needs posting to: {', '.join(platforms)}")
+            print(
+                f"✓ {file_path} needs posting to: {', '.join(platforms)}",
+                file=sys.stderr,
+            )
         else:
-            print(f"○ {file_path} already posted to all platforms")
+            print(f"○ {file_path} already posted to all platforms", file=sys.stderr)
 
     return posts_to_publish
 
@@ -257,11 +258,19 @@ def main():
         # Detect mode: find posts that need publishing
         posts = detect_posts_to_publish()
 
-        # Output as JSON for easy consumption by other scripts
+        # Always output valid JSON to stdout (even if empty)
         print(json.dumps(posts, indent=2))
 
-        # Exit with status indicating if there are posts to publish
-        sys.exit(0 if posts else 1)
+        # Log to stderr so it doesn't interfere with JSON
+        if posts:
+            print(
+                f"\nDetected {len(posts)} post(s) needing publication", file=sys.stderr
+            )
+        else:
+            print("No posts need publishing", file=sys.stderr)
+
+        # Exit with 0 always - let the workflow check if dict is empty
+        sys.exit(0)
 
 
 if __name__ == "__main__":

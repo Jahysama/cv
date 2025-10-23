@@ -15,7 +15,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
         with:
-          fetch-depth: 2  # Need history to detect changes
+          fetch-depth: 0  # Get full history to avoid issues with git diff
           token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Set up Python
@@ -31,26 +31,35 @@ jobs:
       - name: Detect posts to publish
         id: detect
         run: |
-          # Run the detection script and save output
+          # Run the detection script - stderr goes to console, stdout to file
           python .github/workflows/detect_posts_to_publish.py > posts.json
           
-          # Debug: show what we got
-          echo "=== Detection output ==="
+          # Debug: show what we got (this shows stderr output above)
+          echo "=== JSON content ==="
           cat posts.json
-          echo "======================="
+          echo "===================="
           
-          # Check if the JSON is empty object or has content
+          # Check if the JSON is valid and non-empty
           if [ ! -s posts.json ]; then
             echo "has_posts=false" >> $GITHUB_OUTPUT
             echo "posts.json is empty"
           else
             # Use python to check if JSON dict is empty
-            HAS_POSTS=$(python -c "import json; data = json.load(open('posts.json')); print('true' if data else 'false')")
+            HAS_POSTS=$(python3 -c "
+          import json
+          import sys
+          try:
+              with open('posts.json', 'r') as f:
+                  data = json.load(f)
+              print('true' if data else 'false')
+          except:
+              print('false')
+          ")
             echo "has_posts=$HAS_POSTS" >> $GITHUB_OUTPUT
             
             if [ "$HAS_POSTS" = "true" ]; then
               echo "Posts to publish:"
-              cat posts.json | python -m json.tool
+              python3 -m json.tool posts.json
             else
               echo "No posts need publishing"
             fi
