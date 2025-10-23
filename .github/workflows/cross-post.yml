@@ -31,16 +31,29 @@ jobs:
       - name: Detect posts to publish
         id: detect
         run: |
+          # Run the detection script and save output
           python .github/workflows/detect_posts_to_publish.py > posts.json
           
-          # Check if there are any posts
-          if [ -s posts.json ] && [ "$(cat posts.json)" != "{}" ]; then
-            echo "has_posts=true" >> $GITHUB_OUTPUT
-            echo "Posts to publish:"
-            cat posts.json | python -m json.tool
-          else
+          # Debug: show what we got
+          echo "=== Detection output ==="
+          cat posts.json
+          echo "======================="
+          
+          # Check if the JSON is empty object or has content
+          if [ ! -s posts.json ]; then
             echo "has_posts=false" >> $GITHUB_OUTPUT
-            echo "No posts need publishing"
+            echo "posts.json is empty"
+          else
+            # Use python to check if JSON dict is empty
+            HAS_POSTS=$(python -c "import json; data = json.load(open('posts.json')); print('true' if data else 'false')")
+            echo "has_posts=$HAS_POSTS" >> $GITHUB_OUTPUT
+            
+            if [ "$HAS_POSTS" = "true" ]; then
+              echo "Posts to publish:"
+              cat posts.json | python -m json.tool
+            else
+              echo "No posts need publishing"
+            fi
           fi
 
       - name: Post to Telegram

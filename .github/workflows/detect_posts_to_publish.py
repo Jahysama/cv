@@ -28,17 +28,21 @@ def get_changed_markdown_files() -> List[str]:
 
         changed_files = result.stdout.strip().split("\n")
 
-        # Filter for markdown files in blog_posts directory
+        # Filter out empty strings and filter for markdown files in blog_posts directory
         markdown_files = [
             f
             for f in changed_files
-            if f.startswith("blog_posts/") and f.endswith(".md")
+            if f and f.startswith("blog_posts/") and f.endswith(".md")
         ]
 
         return markdown_files
     except subprocess.CalledProcessError as e:
-        print(f"Error getting changed files: {e}", file=sys.stderr)
-        return []
+        # If git command fails, try to get all markdown files (fallback for first commit)
+        print(
+            f"Warning: Could not get git diff, using all markdown files",
+            file=sys.stderr,
+        )
+        return glob.glob("blog_posts/*.md")
 
 
 def parse_frontmatter(file_path: str) -> Dict:
