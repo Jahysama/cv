@@ -1,10 +1,14 @@
 ---
-title: "How I built my website with Claude"
-date: "2024-08-13"
-slug: "my-website"
-excerpt: "This is my experience building a website with Claude AI"
-abstract: "How I build my website with Claude, placeholder blogpost"
-platforms: ["telegram"]
+abstract: How I build my website with Claude, placeholder blogpost
+date: '2024-08-13'
+excerpt: This is my experience building a website with Claude AI
+platforms:
+- telegram
+posted_telegram_at: '2025-10-23T19:54:26.023993'
+posted_to:
+- telegram
+slug: my-website
+title: How I built my website with Claude
 ---
 
 # Creating My Personal Website with Claude AI: A Journey of Discovery
