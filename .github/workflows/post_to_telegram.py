@@ -120,7 +120,7 @@ def main():
 
     if not posts:
         print("No posts to publish")
-        return 0
+        return True
 
     # Track successful posts
     successful_posts = []
@@ -170,7 +170,7 @@ def main():
     with open("telegram_results.json", "w") as f:
         json.dump(output, f, indent=2)
 
-    return 0 if successful_posts else 1
+    return True if successful_posts else False
 
 
 if __name__ == "__main__":
