@@ -25,7 +25,7 @@ I decided to completely recreate my personal website. The previous version was b
 
 ## The Early Stages
 
-Everything was simple and "macaroni coded":
+Initially, everything was simple and "macaroni coded":
 
 - The entire backend resided in a single file
 - CSS was minimal
