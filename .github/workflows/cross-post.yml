@@ -90,19 +90,21 @@ jobs:
       - name: Post to Mastodon
         if: steps.detect.outputs.has_posts == 'true'
         run: |
-          echo "Starting Mastodon posting..."
-          set -x  # Enable debug output
+          echo "=== Checking posts.json content ==="
+          cat posts.json
+          echo ""
+          echo "=== Starting Mastodon posting ==="
           python .github/workflows/post_to_mastodon.py \
             --instance-url "${{ secrets.MASTODON_INSTANCE_URL }}" \
             --access-token "${{ secrets.MASTODON_ACCESS_TOKEN }}" \
-            --posts-json posts.json 2>&1
+            --posts-json posts.json
           EXIT_CODE=$?
           echo "Mastodon script exited with code: $EXIT_CODE"
           if [ -f mastodon_results.json ]; then
             echo "Results file created:"
             cat mastodon_results.json
           else
-            echo "No results file created!"
+            echo "No results file created - script may have skipped posting"
           fi
 
       - name: Update frontmatter for successful posts
