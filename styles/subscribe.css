@@ -1,0 +1,160 @@
+/* Subscribe Section */
+.subscribe-section {
+  margin: 30px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.subscribe-btn {
+  background-color: var(--green);
+  color: var(--base);
+  border: 2px solid var(--green);
+  border-radius: 8px;
+  padding: 16px 32px;
+  font-family: "Courier New", monospace;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 56px;
+  width: 100%;
+  max-width: 400px;
+}
+
+.subscribe-btn:hover {
+  background-color: var(--teal);
+  border-color: var(--teal);
+}
+
+.subscribe-btn:active {
+  background-color: var(--green);
+}
+
+.subscribe-btn .dropdown-arrow {
+  transition: transform 0.3s ease;
+}
+
+.subscribe-btn .dropdown-arrow.rotate {
+  transform: rotate(180deg);
+}
+
+/* Dropdown */
+.subscribe-dropdown {
+  background-color: var(--surface0);
+  border: 2px solid var(--green);
+  border-radius: 10px;
+  padding: 10px;
+  width: 100%;
+  max-width: 400px;
+  margin-top: 10px;
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition:
+    opacity 0.3s ease,
+    max-height 0.3s ease;
+}
+
+.subscribe-dropdown.show {
+  max-height: 1000px;
+  opacity: 1;
+  overflow: visible;
+}
+
+/* Subscribe Links */
+.subscribe-link {
+  display: flex;
+  align-items: center;
+  padding: 12px 16px;
+  margin: 5px 0;
+  background-color: var(--base);
+  border: 2px solid var(--surface2);
+  border-radius: 8px;
+  text-decoration: none;
+  color: var(--text);
+  transition: all 0.2s ease;
+  min-height: 60px;
+}
+
+.subscribe-link:hover {
+  background-color: var(--surface1);
+  border-color: var(--green);
+}
+
+.subscribe-link svg {
+  flex-shrink: 0;
+  margin-right: 16px;
+  stroke: var(--green);
+}
+
+.subscribe-link-content {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.subscribe-link-title {
+  font-weight: bold;
+  font-size: 16px;
+  color: var(--text);
+  margin-bottom: 2px;
+}
+
+.subscribe-link-desc {
+  font-size: 13px;
+  color: var(--subtext0);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .subscribe-btn {
+    font-size: 16px;
+    padding: 14px 24px;
+    min-height: 52px;
+  }
+
+  .subscribe-dropdown {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .subscribe-link {
+    padding: 10px 12px;
+    min-height: 56px;
+  }
+
+  .subscribe-link svg {
+    width: 20px;
+    height: 20px;
+    margin-right: 12px;
+  }
+
+  .subscribe-link-title {
+    font-size: 15px;
+  }
+
+  .subscribe-link-desc {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .subscribe-btn {
+    font-size: 15px;
+    padding: 12px 20px;
+  }
+
+  .subscribe-link {
+    padding: 8px 10px;
+  }
+
+  .subscribe-link svg {
+    width: 18px;
+    height: 18px;
+    margin-right: 10px;
+  }
+}
