@@ -90,11 +90,30 @@ jobs:
       - name: Post to Mastodon
         if: steps.detect.outputs.has_posts == 'true'
         run: |
+          echo "=== Checking posts.json content ==="
+          cat posts.json
+          echo ""
+          echo "=== Starting Mastodon posting ==="
           python .github/workflows/post_to_mastodon.py \
             --instance-url "${{ secrets.MASTODON_INSTANCE_URL }}" \
             --access-token "${{ secrets.MASTODON_ACCESS_TOKEN }}" \
             --posts-json posts.json
-          echo "=== Mastodon posting complete ==="
+          EXIT_CODE=$?
+          echo "Mastodon script exited with code: $EXIT_CODE"
+          if [ -f mastodon_results.json ]; then
+            echo "Results file created:"
+            cat mastodon_results.json
+          else
+            echo "No results file created - script may have skipped posting"
+          fi
+
+      - name: Post to Dev.to
+        if: steps.detect.outputs.has_posts == 'true'
+        run: |
+          python .github/workflows/post_to_devto.py \
+            --api-key "${{ secrets.DEVTO_API_KEY }}" \
+            --mode full \
+            --posts-json posts.json
 
       - name: Update frontmatter for successful posts
         if: steps.detect.outputs.has_posts == 'true'

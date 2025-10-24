@@ -26,18 +26,30 @@ def format_mastodon_message(post_info: Dict) -> str:
     abstract = post_info.get("abstract", "")
     url = post_info.get("url", "")
 
+    # Get hashtags from metadata, or use defaults
+    metadata = post_info.get("metadata", {})
+    hashtags = metadata.get("hashtags", ["TechBlog", "Programming", "WebDev"])
+
+    # Format hashtags with # prefix
+    hashtag_string = " ".join(
+        [f"#{tag}" if not tag.startswith("#") else tag for tag in hashtags]
+    )
+
     # Mastodon has 500 char limit on most instances
     # Build the post
-    post = f"📝 {title}\n\n{abstract}\n\n{url}\n\n#TechBlog #Programming #WebDev"
+    post = f"📝 {title}\n\n{abstract}\n\n{url}\n\n{hashtag_string}"
 
     # Check if we're over limit
     if len(post) > 500:
-        # Truncate abstract to fit
-        available = (
-            500 - len(f"📝 {title}\n\n\n\n{url}\n\n#TechBlog #Programming #WebDev") - 3
-        )
-        truncated_abstract = abstract[:available] + "..."
-        post = f"📝 {title}\n\n{truncated_abstract}\n\n{url}\n\n#TechBlog #Programming #WebDev"
+        # Try without hashtags first
+        post_no_tags = f"📝 {title}\n\n{abstract}\n\n{url}"
+        if len(post_no_tags) <= 500:
+            post = post_no_tags
+        else:
+            # Truncate abstract to fit
+            available = 500 - len(f"📝 {title}\n\n\n\n{url}") - 3
+            truncated_abstract = abstract[:available] + "..."
+            post = f"📝 {title}\n\n{truncated_abstract}\n\n{url}"
 
     return post
 

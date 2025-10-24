@@ -20,12 +20,25 @@ def format_telegram_message(post_info: Dict) -> str:
     abstract = post_info.get("abstract", "")
     url = post_info.get("url", "")
 
+    # Get hashtags from metadata
+    metadata = post_info.get("metadata", {})
+    hashtags = metadata.get("hashtags_telegram", metadata.get("hashtags", []))
+
+    # Format hashtags (Telegram uses #hashtag format)
+    hashtag_string = " ".join(
+        [f"#{tag}" if not tag.startswith("#") else tag for tag in hashtags]
+    )
+
     # Using HTML formatting (Telegram supports both HTML and Markdown)
     message = f"""<b>{title}</b>
 
 {abstract}
 
 <a href="{url}">Read full article →</a>"""
+
+    # Add hashtags if present
+    if hashtag_string:
+        message += f"\n\n{hashtag_string}"
 
     return message
 
@@ -120,7 +133,7 @@ def main():
 
     if not posts:
         print("No posts to publish")
-        return True
+        return 0
 
     # Track successful posts
     successful_posts = []
@@ -170,7 +183,7 @@ def main():
     with open("telegram_results.json", "w") as f:
         json.dump(output, f, indent=2)
 
-    return True if successful_posts else False
+    return 0 if successful_posts else 1
 
 
 if __name__ == "__main__":

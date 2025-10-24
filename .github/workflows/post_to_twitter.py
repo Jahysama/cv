@@ -27,9 +27,22 @@ def format_twitter_message(post_info: Dict, max_length: int = 280) -> str:
     abstract = post_info.get("abstract", "")
     url = post_info.get("url", "")
 
-    # URL will be automatically shortened by Twitter to ~23 chars
-    # Reserve space: emoji (2) + newlines (2) + URL (23) = 27 chars
-    available_chars = max_length - 27
+    # Get hashtags from metadata - try Twitter-specific first, then general
+    metadata = post_info.get("metadata", {})
+    hashtags = metadata.get("hashtags_twitter", metadata.get("hashtags", []))
+
+    # Format hashtags
+    hashtag_string = " ".join(
+        [f"#{tag}" if not tag.startswith("#") else tag for tag in hashtags]
+    )
+
+    # Calculate available space
+    # URL ~23 chars, emoji 2, newlines, hashtags
+    reserved = 23 + 2 + 4  # URL + emoji + newlines
+    if hashtag_string:
+        reserved += len(hashtag_string) + 2  # hashtags + newlines
+
+    available_chars = max_length - reserved
 
     # Build tweet
     tweet = f"📝 {title}\n\n"
@@ -44,6 +57,10 @@ def format_twitter_message(post_info: Dict, max_length: int = 280) -> str:
         tweet += truncated
 
     tweet += url
+
+    # Add hashtags if they fit
+    if hashtag_string and len(tweet) + len(hashtag_string) + 2 <= max_length:
+        tweet += f"\n\n{hashtag_string}"
 
     return tweet
 
