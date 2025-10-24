@@ -80,30 +80,20 @@ jobs:
       - name: Post to Twitter
         if: steps.detect.outputs.has_posts == 'true'
         run: |
-          # Only run if Twitter secrets are configured
-          if [ -n "${{ secrets.TWITTER_API_KEY }}" ]; then
-            python .github/workflows/post_to_twitter.py \
-              --api-key "${{ secrets.TWITTER_API_KEY }}" \
-              --api-secret "${{ secrets.TWITTER_API_SECRET }}" \
-              --access-token "${{ secrets.TWITTER_ACCESS_TOKEN }}" \
-              --access-token-secret "${{ secrets.TWITTER_ACCESS_TOKEN_SECRET }}" \
-              --posts-json posts.json
-          else
-            echo "Twitter credentials not configured, skipping Twitter posting"
-          fi
+          python .github/workflows/post_to_twitter.py \
+            --api-key "${{ secrets.TWITTER_API_KEY }}" \
+            --api-secret "${{ secrets.TWITTER_API_SECRET }}" \
+            --access-token "${{ secrets.TWITTER_ACCESS_TOKEN }}" \
+            --access-token-secret "${{ secrets.TWITTER_ACCESS_TOKEN_SECRET }}" \
+            --posts-json posts.json
 
       - name: Post to Mastodon
         if: steps.detect.outputs.has_posts == 'true'
         run: |
-          # Only run if Mastodon secrets are configured
-          if [ -n "${{ secrets.MASTODON_ACCESS_TOKEN }}" ]; then
-            python .github/workflows/post_to_mastodon.py \
-              --instance-url "${{ secrets.MASTODON_INSTANCE_URL }}" \
-              --access-token "${{ secrets.MASTODON_ACCESS_TOKEN }}" \
-              --posts-json posts.json
-          else
-            echo "Mastodon credentials not configured, skipping Mastodon posting"
-          fi
+          python .github/workflows/post_to_mastodon.py \
+            --instance-url "${{ secrets.MASTODON_INSTANCE_URL }}" \
+            --access-token "${{ secrets.MASTODON_ACCESS_TOKEN }}" \
+            --posts-json posts.json
 
       - name: Update frontmatter for successful posts
         if: steps.detect.outputs.has_posts == 'true'
@@ -142,6 +132,29 @@ jobs:
           
           successful_posts = results.get('successful_posts', [])
           platform = results.get('platform', 'twitter')
+          
+          for file_path in successful_posts:
+              print(f"Marking {file_path} as posted to {platform}")
+              subprocess.run([
+                  'python',
+                  '.github/workflows/detect_posts_to_publish.py',
+                  '--update',
+                  f'{file_path}:{platform}'
+              ], check=True)
+          EOF
+          fi
+          
+          # Read the results from Mastodon posting
+          if [ -f mastodon_results.json ]; then
+            python << 'EOF'
+          import json
+          import subprocess
+          
+          with open('mastodon_results.json', 'r') as f:
+              results = json.load(f)
+          
+          successful_posts = results.get('successful_posts', [])
+          platform = results.get('platform', 'mastodon')
           
           for file_path in successful_posts:
               print(f"Marking {file_path} as posted to {platform}")
