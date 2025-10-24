@@ -1,15 +1,16 @@
 ---
 abstract: How I build my website with Claude, placeholder blogpost
-date: '2024-08-13'
+date: "2024-08-13"
 excerpt: This is my experience building a website with Claude AI
 platforms:
-- telegram
-- twitter
-posted_telegram_at: '2025-10-23T20:00:45.001414'
+  - telegram
+  - twitter
+  - mastodon
+posted_telegram_at: "2025-10-23T20:00:45.001414"
 posted_to:
-- telegram
-- twitter
-posted_twitter_at: '2025-10-24T05:43:43.823135'
+  - telegram
+  - twitter
+posted_twitter_at: "2025-10-24T05:43:43.823135"
 slug: my-website
 title: How I built my website with Claude
 ---
